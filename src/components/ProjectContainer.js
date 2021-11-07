@@ -1,25 +1,25 @@
-import React from 'react';
+import { Component } from 'react';
 import ProjectCard from './ProjectCard';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getProjects } from '../actions/projectActions';
 
-class ProjectContainer extends React.Component {
+class ProjectContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            projects: []
-        }
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/all')
-            .then(resp => resp.json())
-            .then(data => this.setState({projects: data}))
-            .catch(err => console.log(err));
+        if (this.props.userauth.isLoggedIn === false) {
+            this.props.history.push("/login");
+        }
+        this.props.getProjects();
     }
 
     render () {
-
-        const projectElem = this.state.projects.map((el, index) => {
+        console.log(this.props.projects.projectlist);
+        const projectElem = this.props.projects.projectlist.map((el, index) => {
             return (
                 <div key={index}>
                     <ProjectCard 
@@ -31,7 +31,7 @@ class ProjectContainer extends React.Component {
             );
         })
 
-        if (this.state.projects.length > 0) {
+        if (this.props.projects.projectlist.length > 0) {
             return (
                 <div className="container">
                     <div className="d-flex">
@@ -68,4 +68,21 @@ class ProjectContainer extends React.Component {
     }
 }
 
-export default ProjectContainer;
+ProjectContainer.propTypes = {
+    getProjects: PropTypes.func.isRequired,
+    projects: PropTypes.object.isRequired,
+    userauth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    projects: state.projects,
+    userauth: state.userauth
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProjects: () => {getProjects(dispatch);}
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

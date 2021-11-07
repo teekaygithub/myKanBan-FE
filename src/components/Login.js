@@ -26,7 +26,14 @@ class Login extends Component {
             "username": this.state.username,
             "password": this.state.password
         }
-        this.props.loginUser(credentials, this.props.history);
+        this.props.loginUser(credentials);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.userauth.isLoggedIn !== this.props.userauth.isLoggedIn) {
+            console.log("Logged in, redirecting to dashboard");
+            this.props.history.push("/dashboard")
+        }
     }
 
     render () {
@@ -79,7 +86,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
     return {
-        loginUser: (credentials, history) => {loginUser(dispatch, credentials, history)}
+        loginUser: (credentials) => {loginUser(dispatch, credentials)}
     };
 }
 

@@ -22,7 +22,7 @@ class Header extends Component {
             <Link to="/">Home</Link>
           </li>
           <li className='nav-item'>
-            <Link to="/projects">Projects</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
           <li className='nav-item'>
             <a href="" onClick={this.handleLogout} >Log Out</a>
