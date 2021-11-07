@@ -2,7 +2,8 @@ import { LOGIN, ERRORS } from "../actions/types";
 
 const initialState = {
     token: {},
-    isLoggedIn: false
+    isLoggedIn: false,
+    user: {}
 }
 
 export default function(state=initialState, action) {

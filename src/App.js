@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import { Provider } from 'react-redux';
 import store from './store';
+import Register from './components/Register';
 
 class App extends Component {
   constructor(props) {
@@ -61,8 +62,10 @@ class App extends Component {
             <Route exact path="/">
               <Welcome />
             </Route>
+
+            <Route exact path="/register" component={Register} />
             
-            <Route path="/login">
+            <Route exact path="/login">
               {this.state.loggedIn ? <Redirect to="/projects" /> : <Login loginHandler={this.handleLogin} />}
             </Route>
             

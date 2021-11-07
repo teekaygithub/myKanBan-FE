@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { loginUser } from '../actions/authActions';
+import { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { registerUser } from '../actions/authActions';
 
-class Login extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username:"",
-            password:""
+            username: "",
+            fullname: "",
+            password: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,38 +23,41 @@ class Login extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const credentials = {
+        const newUser = {
             "username": this.state.username,
+            "fullname": this.state.fullname,
             "password": this.state.password
         }
-        this.props.loginUser(credentials);
-    }
-
-    componentDidUpdate(nextProps) {
-        if (nextProps.userauth.isLoggedIn) {
-            this.props.history.push("/")
-        }
+        this.props.registerUser(newUser, this.props.history);
     }
 
     render () {
         return (
-            <div className="container my-5">
+            <div className="container my-5 w-50">
                 <div style={{textAlign:"center"}} className="jumbotron">
                     <h1>Thank you for trying out myKanBan!</h1>
-                    <p>Authentication is still under development, so please use the following credential below:</p>
-                    <p>User e-mail address: <strong>test@gmail.com</strong></p>
-                    <p>Password: <strong>1234</strong></p>
                 </div>
-                <h3>Log In</h3>
-                <form>
+                <h3>Register new user</h3>
+                <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label>Email</label>
                         <input 
                             type="email"
                             name="username"
                             className="form-control"
+                            style={{border: "1px solid #000"}}
                             onChange={this.handleChange}
                             value={this.state.email} />
+                    </div>
+                    <div className = "form-group">
+                        <label>Full name</label>
+                        <input
+                            type="text"
+                            name="fullname"
+                            className="form-control"
+                            style={{border: "1px solid #000"}}
+                            onChange={this.handleChange}
+                            value={this.state.fullname} />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
@@ -61,32 +65,27 @@ class Login extends Component {
                             type="password"
                             name="password"
                             className="form-control"
+                            style={{border: "1px solid #000"}}
                             onChange={this.handleChange}
                             value={this.state.password} />
                     </div>
                     <button 
                         type="submit" 
-                        className="btn btn-primary"
-                        onClick={this.handleSubmit}>Login</button>
+                        className="btn btn-primary">Submit</button>
                 </form>
             </div>
         );
     }
 }
 
-Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    userauth: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-    userauth: state.userauth
-});
-
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        loginUser: (credentials) => {loginUser(dispatch, credentials)}
+        registerUser: (newUser, history) => {registerUser(dispatch, newUser, history);}
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+Register.propTypes = {
+    registerUser: PropTypes.func.isRequired
+}
+
+export default connect(null, mapDispatchToProps)(Register);
