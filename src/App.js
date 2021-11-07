@@ -15,41 +15,28 @@ import Login from './components/Login';
 import { Provider } from 'react-redux';
 import store from './store';
 import Register from './components/Register';
+import { LOGIN, LOGOUT } from './actions/types';
+import { setRequestHeader } from './actions/jwtUtility';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      loggedIn: sessionStorage.getItem('loggedin')
-    }
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
-    let loggedIn = sessionStorage.getItem('loggedin');
-    if (loggedIn) {
-      this.setState({loggedIn: true});
-    }
-  }
-
-  handleLogin(email, pw) {
-    if (email === 'test@gmail.com') {
-      this.setState({
-        loggedIn: true
-      });
-      sessionStorage.setItem('loggedin', true);
-      console.log(`state.loggedIn: ${this.state.loggedIn}`);
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      setRequestHeader(token);
+      store.dispatch({
+        type: LOGIN,
+        payload: localStorage.getItem('jwt')
+      })
     } else {
-      console.log(`INVALID EMAIL: ${email}`);
+      setRequestHeader(false);
+      store.dispatch({
+        type: LOGOUT
+      });
     }
-  }
-  
-  handleLogout() {
-    this.setState({
-      loggedIn:false
-    });
-    sessionStorage.removeItem('loggedin');
   }
 
   render() {
@@ -67,20 +54,14 @@ class App extends Component {
 
             <Route exact path="/dashboard" component={ProjectContainer} />
             
-            <Route 
+            {/* <Route 
               path = "/project/:id"
               render = {props => this.state.loggedIn ? 
                                       <KanBanContainer {...props} /> : 
                                       <Redirect to="/login" /> }>
-            </Route>
+            </Route> */}
 
-            <Route 
-              path="/addproject"
-              render = {props => this.state.loggedIn ? 
-                                      <AddProject {...props} /> : 
-                                      <Redirect to="/login" />
-              } >
-            </Route>
+            <Route exact path="/addproject" component={AddProject} /> : 
             
             <Route path="/about">
               <About />

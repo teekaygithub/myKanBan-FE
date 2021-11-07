@@ -1,11 +1,15 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { postProject } from '../actions/projectActions';
 
 class AddProject extends Component {
     constructor(props) {
         super(props);
         this.state = {
             title: "",
-            description: ""
+            description: "",
+            projectIdentifier: "",
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,29 +21,21 @@ class AddProject extends Component {
         });
     }
 
-    async handleSubmit(e) {
-        e.preventDefault()
-
-        const res = await fetch('http://localhost:8080/api/addproject', {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(this.state),
-        });
-
-        if (res.status && res.status === 201) {
-            this.props.history.push("/projects");
-        } else {
-            console.log(`Bad request, status: ${res.status}`);
+    handleSubmit(e) {
+        e.preventDefault();
+        const newProject = {
+            title: this.state.title,
+            description: this.state.description,
+            projectIdentifier: this.state.projectIdentifier
         }
+        this.props.postProject(newProject, this.props.history);
     }
 
     render() {
         return (
             <div className="container-fluid w-50 my-3">
                 <h2>Create a new project</h2>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label>Title</label>
                         <input 
@@ -56,14 +52,31 @@ class AddProject extends Component {
                             className="form-control"
                             onChange={this.handleChange}></input>
                     </div>
+                    <div className="form-group">
+                        <label>Project Identifier</label>
+                        <input 
+                            type="text"
+                            name="projectIdentifier"
+                            className="form-control"
+                            onChange={this.handleChange}></input>
+                    </div>
                     <button 
                         type="submit" 
-                        className="btn btn-primary"
-                        onClick={this.handleSubmit}>Submit</button>
+                        className="btn btn-primary">Submit</button>
                 </form>
             </div>
         );
     }
 }
 
-export default AddProject;
+AddProject.propType = {
+    postProject: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        postProject: (newProject, history) => {postProject(dispatch, newProject, history);}
+    };
+}
+
+export default connect(null, mapDispatchToProps)(AddProject);
