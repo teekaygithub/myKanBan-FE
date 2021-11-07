@@ -65,9 +65,7 @@ class App extends Component {
 
             <Route exact path="/register" component={Register} />
             
-            <Route exact path="/login">
-              {this.state.loggedIn ? <Redirect to="/projects" /> : <Login loginHandler={this.handleLogin} />}
-            </Route>
+            <Route exact path="/login" component={Login} />
             
             <Route 
               path = "/project/:id"

@@ -26,13 +26,7 @@ class Login extends Component {
             "username": this.state.username,
             "password": this.state.password
         }
-        this.props.loginUser(credentials);
-    }
-
-    componentDidUpdate(nextProps) {
-        if (nextProps.userauth.isLoggedIn) {
-            this.props.history.push("/")
-        }
+        this.props.loginUser(credentials, this.props.history);
     }
 
     render () {
@@ -85,7 +79,7 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
     return {
-        loginUser: (credentials) => {loginUser(dispatch, credentials)}
+        loginUser: (credentials, history) => {loginUser(dispatch, credentials, history)}
     };
 }
 
