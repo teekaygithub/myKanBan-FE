@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN, ERRORS } from './types';
+import { LOGIN, ERRORS, LOGOUT } from './types';
 
 export const registerUser = async (dispatch, newUser, history) => {
     try {
@@ -34,4 +34,11 @@ export const loginUser =  async (dispatch, credentials, history) => {
             payload: {}
         }
     }
+}
+
+export const logoutUser = (dispatch) => {
+    localStorage.removeItem("jwt");
+    dispatch({
+        type: LOGOUT
+    });
 }

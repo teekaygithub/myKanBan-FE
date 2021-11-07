@@ -1,4 +1,4 @@
-import { LOGIN, ERRORS } from "../actions/types";
+import { LOGIN, ERRORS, LOGOUT } from "../actions/types";
 
 const initialState = {
     token: {},
@@ -13,6 +13,13 @@ export default function(state=initialState, action) {
                 ...state,
                 isLoggedIn: true,
                 token: action.payload
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                token: {},
+                isLoggedIn: false,
+                user: {}
             }
         case ERRORS:
         default:
