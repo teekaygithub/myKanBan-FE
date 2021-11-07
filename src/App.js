@@ -56,7 +56,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <Header loggedIn={this.state.loggedIn} logoutHandler={this.handleLogout} />
+          <Header />
           <Switch>
 
             <Route exact path="/">

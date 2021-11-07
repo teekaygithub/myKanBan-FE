@@ -1,8 +1,15 @@
+import { Component } from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-function Header (props) {
-  if (props.loggedIn) {
-    return (
+class Header extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const publicHeader = (
       <nav className="navbar bg-dark">
         <ul className='navbar-nav'>
           <li className='nav-item'>
@@ -12,13 +19,13 @@ function Header (props) {
             <Link to="/projects">Projects</Link>
           </li>
           <li className='nav-item'>
-            <a href="" onClick={props.logoutHandler}>Log Out</a>
+            <a href="" >Log Out</a>
           </li>
         </ul>
       </nav>
     );
-  } else {
-    return (
+
+    const privateHeader = (
       <nav className="navbar bg-dark">
         <ul className='navbar-nav'>
           <li className='nav-item'>
@@ -33,7 +40,17 @@ function Header (props) {
         </ul>
       </nav>
     );
+    let presentation = this.props.userauth.isLoggedIn ? privateHeader : publicHeader
+    return(presentation);
   }
 }
 
-export default Header;
+Header.propTypes = {
+  userauth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  userauth: state.userauth
+});
+
+export default connect(mapStateToProps, null)(Header);

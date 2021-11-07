@@ -21,10 +21,11 @@ export const loginUser =  async (dispatch, credentials, history) => {
     try {
         const res = await axios.post(`http://localhost:8080/api/users/login?username=${credentials.username}&password=${credentials.password}`);
         console.log(`Login successful: ${res.data}`);
+        localStorage.setItem("jwt", res.data.access_token);
         history.push("/")
         dispatch({
             type: LOGIN,
-            payload: res.data
+            payload: res.data.access_token
         });
     } catch (err) {
         console.log(`Login failure: ${err}`);
