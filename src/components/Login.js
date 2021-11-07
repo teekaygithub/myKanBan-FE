@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { loginUser } from '../actions/authActions';
+import { propTypes } from 'react-bootstrap/esm/Image';
+import { connect } from 'react-redux';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email:"",
+            username:"",
             password:""
         }
         this.handleChange = this.handleChange.bind(this);
@@ -13,15 +16,24 @@ class Login extends Component {
     }
 
     handleChange(e) {
-        const name = e.target.name;
         this.setState({
-            [name]: e.target.value
+            [e.target.name]: e.target.value
         });
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.loginHandler(this.state.email, this.state.password);
+        const credentials = {
+            "username": this.state.username,
+            "password": this.state.password
+        }
+        this.props.loginUser(credentials);
+    }
+
+    componentDidUpdate(nextProps) {
+        if (nextProps.userauth.isLoggedIn) {
+            this.props.history.push("/")
+        }
     }
 
     render () {
@@ -39,7 +51,7 @@ class Login extends Component {
                         <label>Email</label>
                         <input 
                             type="email"
-                            name="email"
+                            name="username"
                             className="form-control"
                             onChange={this.handleChange}
                             value={this.state.email} />
@@ -63,4 +75,19 @@ class Login extends Component {
     }
 }
 
-export default Login;
+Login.propTypes = {
+    loginUser: PropTypes.func.isRequired,
+    userauth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    userauth: state.userauth
+});
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loginUser: (credentials) => {loginUser(dispatch, credentials)}
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

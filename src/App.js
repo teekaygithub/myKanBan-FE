@@ -12,6 +12,8 @@ import AddProject from "./components/AddProject";
 import Welcome from './components/Welcome';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import { Provider } from 'react-redux';
+import store from './store';
 
 class App extends Component {
   constructor(props) {
@@ -51,45 +53,47 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Header loggedIn={this.state.loggedIn} logoutHandler={this.handleLogout} />
-        <Switch>
+      <Provider store={store}>
+        <div className="App">
+          <Header loggedIn={this.state.loggedIn} logoutHandler={this.handleLogout} />
+          <Switch>
 
-          <Route exact path="/">
-            <Welcome />
-          </Route>
-          
-          <Route path="/login">
-            {this.state.loggedIn ? <Redirect to="/projects" /> : <Login loginHandler={this.handleLogin} />}
-          </Route>
-          
-          <Route 
-            path = "/project/:id"
-            render = {props => this.state.loggedIn ? 
-                                    <KanBanContainer {...props} /> : 
-                                    <Redirect to="/login" /> }>
-          </Route>
-          
-          <Route path="/projects">
-            {console.log(`state.loggedIn: ${this.state.loggedIn}`)}
-            {this.state.loggedIn ? <ProjectContainer /> : <Redirect to="/login" />}
-          </Route>
+            <Route exact path="/">
+              <Welcome />
+            </Route>
+            
+            <Route path="/login">
+              {this.state.loggedIn ? <Redirect to="/projects" /> : <Login loginHandler={this.handleLogin} />}
+            </Route>
+            
+            <Route 
+              path = "/project/:id"
+              render = {props => this.state.loggedIn ? 
+                                      <KanBanContainer {...props} /> : 
+                                      <Redirect to="/login" /> }>
+            </Route>
+            
+            <Route path="/projects">
+              {console.log(`state.loggedIn: ${this.state.loggedIn}`)}
+              {this.state.loggedIn ? <ProjectContainer /> : <Redirect to="/login" />}
+            </Route>
 
-          <Route 
-            path="/addproject"
-            render = {props => this.state.loggedIn ? 
-                                    <AddProject {...props} /> : 
-                                    <Redirect to="/login" />
-            } >
-          </Route>
-          
-          <Route path="/about">
-            <About />
-          </Route>
+            <Route 
+              path="/addproject"
+              render = {props => this.state.loggedIn ? 
+                                      <AddProject {...props} /> : 
+                                      <Redirect to="/login" />
+              } >
+            </Route>
+            
+            <Route path="/about">
+              <About />
+            </Route>
 
-        </Switch>
-        <Footer />
-      </div>
+          </Switch>
+          <Footer />
+        </div>
+      </Provider>
     );
   }
 }
