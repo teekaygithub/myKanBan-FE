@@ -1,4 +1,4 @@
-import { GET_PROJECT, GET_TICKETS, POST_PROJECT, POST_TICKET } from "../actions/types";
+import { GET_PROJECT, GET_TICKETS, POST_PROJECT, POST_TICKET, UPDATE_TICKET } from "../actions/types";
 
 const initialState = {
     projectlist: [],
@@ -32,6 +32,13 @@ const projectReducer = (state=initialState, action) => {
                 tickets: state.tickets.push(action.payload),
                 requestPending: false
             }
+        // case UPDATE_TICKET:
+        //     let idx = state.tickets.find(x => x.id === action.payload.id);
+        //     return {
+        //         ...state,
+        //         tickets: state.tickets[idx] = action.payload,
+        //         requestPending: false
+        //     }
         default:
             return state;
     }

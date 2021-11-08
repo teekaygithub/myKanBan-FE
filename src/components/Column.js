@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Ticket from './Ticket';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { updateTicket } from '../actions/projectActions';
 
 class Column extends Component {
     constructor(props) {
@@ -17,9 +20,15 @@ class Column extends Component {
 
     handleDrop(e) {
         e.preventDefault();
-        let data = e.dataTransfer.getData("Text");
+        let data = e.dataTransfer.getData("key");
+        let TID = e.dataTransfer.getData('TID');
+        let PID = e.dataTransfer.getData('PID');
+        let ticket = this.props.projects.tickets.find(x => x.ticketIdentifier === TID);
         if (e.target.className==="column") {
             e.target.appendChild(document.getElementById(data));
+            ticket.status = this.props.status;
+            // console.log(this.props.match.params);
+            this.props.updateTicket(PID, ticket);
         }
     }
 
@@ -28,10 +37,7 @@ class Column extends Component {
             this.props.tickets.map((ticket, index) => (
                 <Ticket 
                     key={index}
-                    title={ticket.title} 
-                    description={ticket.description} 
-                    status={ticket.status}
-                    ticketid={index} />
+                    ticket={ticket} />
             )) : null;
         return (
             <div 
@@ -47,4 +53,19 @@ class Column extends Component {
     }
 }
 
-export default Column;
+Column.propTypes = {
+    projects: PropTypes.object.isRequired,
+    updateTicket: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    projects: state.projects
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateTicket: (PID, ticket) => {updateTicket(dispatch, PID, ticket);}
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Column);

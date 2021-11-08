@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ERRORS, GET_PROJECT, GET_TICKETS, POST_PROJECT, POST_TICKET } from './types';
+import { ERRORS, GET_PROJECT, GET_TICKETS, POST_PROJECT, POST_TICKET, UPDATE_TICKET } from './types';
 import { headerConfig } from './jwtUtility';
 
 export const getProjects = async (dispatch) => {
@@ -57,6 +57,21 @@ export const postTicket = async(dispatch, PID, newTicket) => {
         dispatch({
             type: POST_TICKET,
             payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: ERRORS,
+            payload: err
+        });
+    }
+}
+
+export const updateTicket = async (dispatch, PID, ticket) => {
+    try {
+        await axios.post(`http://localhost:8080/api/projects/ticket?projectIdentifier=${PID}`, ticket, headerConfig);
+        dispatch({
+            type: ERRORS,
+            payload: {}
         });
     } catch (err) {
         dispatch({

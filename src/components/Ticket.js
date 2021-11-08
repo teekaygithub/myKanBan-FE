@@ -7,7 +7,9 @@ class Ticket extends Component {
     }
 
     handleDrag(e) {
-        e.dataTransfer.setData("Text", e.target.id);
+        e.dataTransfer.setData("TID", this.props.ticket.ticketIdentifier);
+        e.dataTransfer.setData("PID", this.props.ticket.projectIdentifier);
+        e.dataTransfer.setData("key", this.props.ticket.id);
     }
 
     render () {
@@ -16,10 +18,11 @@ class Ticket extends Component {
                 className="card ticket mx-auto my-2 px-1 py-1"
                 draggable={true}
                 onDragStart={this.handleDrag}
-                id={this.props.ticketid} >
-                <span><strong>{this.props.title}</strong></span>
-                <span>{this.props.description} </span>
-                <span>Status: {this.props.status}</span>
+                id={this.props.ticket.id} >
+                <span><strong>{this.props.ticket.ticketIdentifier}</strong></span>
+                <span><strong>{this.props.ticket.title}</strong></span>
+                <span>{this.props.ticket.description} </span>
+                <span>Status: {this.props.ticket.status}</span>
             </div>
         );
     }

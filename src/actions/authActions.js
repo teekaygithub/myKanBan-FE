@@ -22,7 +22,7 @@ export const loginUser =  async (dispatch, credentials) => {
     try {
         const res = await axios.post(`http://localhost:8080/api/users/login?username=${credentials.username}&password=${credentials.password}`);
         // Store the JWT in browser storage and the axios request header
-        const token = "Bearer " + res.data.access_token;
+        const token = res.data.access_token;
         localStorage.setItem("jwt", token);
         setRequestHeader(token);
 

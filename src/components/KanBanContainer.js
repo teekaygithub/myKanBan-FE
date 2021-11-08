@@ -42,7 +42,10 @@ class KanBanContainer extends Component {
         } else {
             if (this.props.projects.tickets.length > 0) {
                 const status = ["TODO", "INPROGRESS", "DONE"];
-                const columns = status.map(stat => (<Column tickets={this.props.projects.tickets.filter(x => x.status === stat)} status={stat} />));
+                const columns = status.map(stat => (<Column 
+                    tickets={this.props.projects.tickets.filter(x => x.status === stat)} 
+                    status={stat}
+                    history={this.props.history} />));
                 return (
                     <div className="container" id="kanban-container">
                         <div className="d-flex justify-content-around">
