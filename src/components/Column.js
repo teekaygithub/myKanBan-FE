@@ -11,15 +11,6 @@ class Column extends Component {
         this.handleDrop = this.handleDrop.bind(this);
     }
 
-    componentDidMount() {
-        const filtered = this.props.tickets.filter(ticket => {
-            return ticket.status === this.props.title;
-        });
-        this.setState({
-            tickets: filtered
-        });
-    }
-
     allowDrop(e) {
         e.preventDefault();
     }
@@ -33,8 +24,8 @@ class Column extends Component {
     }
 
     render () {
-        const ticketComponents = this.state.tickets.length > 0 ? 
-            this.state.tickets.map((ticket, index) => (
+        const ticketComponents = this.props.tickets.length > 0 ? 
+            this.props.tickets.map((ticket, index) => (
                 <Ticket 
                     key={index}
                     title={ticket.title} 
@@ -48,7 +39,7 @@ class Column extends Component {
                 onDragOver={this.allowDrop}
                 onDrop={this.handleDrop} >
                 <h3 className="mx-auto py-2">
-                    {this.props.title}
+                    {this.props.status}
                 </h3>
                 {ticketComponents}
             </div>

@@ -7,3 +7,9 @@ export const setRequestHeader = (token) => {
         delete axios.defaults.headers.common['Authorization'];
     }
 }
+
+export const headerConfig = {
+    headers: {
+        'Authorization': localStorage.getItem('jwt')
+    }
+}

@@ -1,49 +1,52 @@
 import axios from 'axios';
-import { bindActionCreators } from 'redux';
 import { ERRORS, GET_PROJECT, GET_TICKETS, POST_PROJECT } from './types';
+import { headerConfig } from './jwtUtility';
 
 export const getProjects = async (dispatch) => {
     try {
-        const res = await axios.get('http://localhost:8080/api/projects/all');
+        const res = await axios.get('http://localhost:8080/api/projects/all', headerConfig);
         dispatch({
             type: GET_PROJECT,
             payload: res.data
         });
     } catch (err) {
+        console.log(err);
         dispatch({
             type: ERRORS,
-            payload: err.response.data
+            payload: err
         });
     }
 }
 
 export const postProject = async (dispatch, newProject, history) => {
     try {
-        const res = await axios.post('http://localhost:8080/api/projects/addproject', newProject);
+        const res = await axios.post('http://localhost:8080/api/projects/addproject', newProject, headerConfig);
         history.push("/dashboard");
         dispatch({
             type: POST_PROJECT,
             payload: res.data
         });
     } catch (err) {
+        console.log(err);
         dispatch({
             type: ERRORS,
-            payload: err.response.data
+            payload: err
         });
     }
 }
 
 export const getTickets = async (dispatch, PID) => {
     try {
-        const res = await axios.get(`http://localhost:8080/api/projects/alltickets?projectIdentifier=${PID}`);
+        const res = await axios.get(`http://localhost:8080/api/projects/alltickets?projectIdentifier=${PID}`, headerConfig);
         dispatch({
             type: GET_TICKETS,
             payload: res.data
         });
     } catch (err) {
+        console.log(err);
         dispatch({
             type: ERRORS,
-            payload: err.response.data
+            payload: err
         });
     }
 }

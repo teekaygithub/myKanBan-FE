@@ -4,14 +4,12 @@ import AddTicket from './AddTicket';
 import '../App.css'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { propTypes } from 'react-bootstrap/esm/Image';
 import { getTickets } from '../actions/projectActions';
 
 class KanBanContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tickets: [],
             project: {}
         }
     }
@@ -21,35 +19,52 @@ class KanBanContainer extends Component {
         this.setState({
             project: this.props.projects.projectlist.find(p => p.projectIdentifier === PID)
         });
+        console.log(this.props.projects);
         this.props.getTickets(PID);
     }
 
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.projects.tickets.length != this.props.projects.tickets.length) {
+    //         this.setState({
+    //             tickets: this.props.projects.tickets
+    //         });
+    //     }
+    // }
+
     render () {
 
-        if (this.props.projects.tickets.length > 0) {
+        if (this.props.projects.requestPending) {
             return (
-                <div className="container" id="kanban-container">
-                    <div className="d-flex justify-content-around">
-                        <h1>
-                            Project: {this.state.project.title}
-                        </h1>
-                        <AddTicket />
-                    </div>
-                    <div className="column-container row my-5" >
-                        <Column tickets={this.state.tickets} title="TODO" />
-                        <Column tickets={this.state.tickets} title="INPROGRESS" />
-                        <Column tickets={this.state.tickets} title="DONE" />
-                    </div>
+                <div>
+                    <h1>Loading...</h1>
                 </div>
             );
         } else {
-            return (
-                <div className="d-flex justify-content-center mx-auto">
-                    <h1>No ticket found for this project</h1>
-                    <AddTicket />
-                </div>
-            );
-        }
+            if (this.props.projects.tickets.length > 0) {
+                const status = ["TODO", "INPROGRESS", "DONE"];
+                const columns = status.map(stat => (<Column tickets={this.props.projects.tickets.filter(x => x.status === stat)} status={stat} />));
+                return (
+                    <div className="container" id="kanban-container">
+                        <div className="d-flex justify-content-around">
+                            <h1>
+                                Project: {this.state.project ? this.state.project.title: null}
+                            </h1>
+                            <AddTicket />
+                        </div>
+                        <div className="column-container row my-5" >
+                            {columns}
+                        </div>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="d-flex justify-content-center mx-auto">
+                        <h1>No ticket found for this project</h1>
+                        <AddTicket />
+                    </div>
+                );
+            }
+        } 
     }
 }
 
