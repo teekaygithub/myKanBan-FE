@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 var ProjectCard = (props) => {
-    const link = "/project/" + props.id;
+    const link = "/project/" + props.PID;
     return (
         <div 
             className="card" 

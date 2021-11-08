@@ -54,16 +54,11 @@ class App extends Component {
 
             <Route exact path="/dashboard" component={ProjectContainer} />
             
-            {/* <Route 
-              path = "/project/:id"
-              render = {props => this.state.loggedIn ? 
-                                      <KanBanContainer {...props} /> : 
-                                      <Redirect to="/login" /> }>
-            </Route> */}
+            <Route exact path = "/project/:id" component={KanBanContainer} />
 
-            <Route exact path="/addproject" component={AddProject} /> : 
+            <Route exact path="/addproject" component={AddProject} />
             
-            <Route path="/about">
+            <Route exact path="/about">
               <About />
             </Route>
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { bindActionCreators } from 'redux';
-import { ERRORS, GET_PROJECT, POST_PROJECT } from './types';
+import { ERRORS, GET_PROJECT, GET_TICKETS, POST_PROJECT } from './types';
 
 export const getProjects = async (dispatch) => {
     try {
@@ -23,6 +23,21 @@ export const postProject = async (dispatch, newProject, history) => {
         history.push("/dashboard");
         dispatch({
             type: POST_PROJECT,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: ERRORS,
+            payload: err.response.data
+        });
+    }
+}
+
+export const getTickets = async (dispatch, PID) => {
+    try {
+        const res = await axios.get(`http://localhost:8080/api/projects/alltickets?projectIdentifier=${PID}`);
+        dispatch({
+            type: GET_TICKETS,
             payload: res.data
         });
     } catch (err) {

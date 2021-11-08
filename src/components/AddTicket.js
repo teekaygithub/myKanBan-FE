@@ -9,59 +9,59 @@ class AddTicket extends Component {
             description: "",
             openModal: false,
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleOpenModal = this.handleOpenModal.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleOpenModal = this.handleOpenModal.bind(this);
+        // this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
-    handleOpenModal() {
-        this.setState({
-            openModal: true,
-        })
-    }
+    // handleOpenModal() {
+    //     this.setState({
+    //         openModal: true,
+    //     })
+    // }
 
-    handleCloseModal() {
-        this.setState({
-            openModal: false,
-        })
-    }
+    // handleCloseModal() {
+    //     this.setState({
+    //         openModal: false,
+    //     })
+    // }
 
-    handleChange(e) {
-        this.setState({
-            [e.target.name] : e.target.value,
-        });
-    }
+    // handleChange(e) {
+    //     this.setState({
+    //         [e.target.name] : e.target.value,
+    //     });
+    // }
 
-    async handleSubmit(e) {
-        e.preventDefault();
-        const newTicket = {
-            title: this.state.title,
-            description: this.state.description,
-            projectId: this.props.project.id,
-            status: 'TODO',
-        }
-        const res = await fetch('http://localhost:8080/api/addticket', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newTicket),
-        })
+    // async handleSubmit(e) {
+    //     e.preventDefault();
+    //     const newTicket = {
+    //         title: this.state.title,
+    //         description: this.state.description,
+    //         projectId: this.props.project.id,
+    //         status: 'TODO',
+    //     }
+    //     const res = await fetch('http://localhost:8080/api/addticket', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(newTicket),
+    //     })
 
-        if (res.status && res.status === 201) {
-            console.log(`Pushing to /project/${this.props.match.params.id}`);
-            this.handleCloseModal();
-            window.location.reload();
-        } else {
-            console.log(`POST request failed: ${res.status}`);
-        }
-    }
+    //     if (res.status && res.status === 201) {
+    //         console.log(`Pushing to /project/${this.props.match.params.id}`);
+    //         this.handleCloseModal();
+    //         window.location.reload();
+    //     } else {
+    //         console.log(`POST request failed: ${res.status}`);
+    //     }
+    // }
 
     render () {
         return (
             <div className="my-3">
-                <button
+                {/* <button
                     type="button"
                     className="btn btn-primary"
                     onClick={this.handleOpenModal} >
@@ -93,7 +93,7 @@ class AddTicket extends Component {
                             className="btn btn-primary"
                             onClick={this.handleSubmit}>Submit</button>
                     </form>
-                </Modal>
+                </Modal> */}
             </div>
         );
     }

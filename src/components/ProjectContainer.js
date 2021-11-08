@@ -26,6 +26,7 @@ class ProjectContainer extends Component {
                             <ProjectCard 
                                 title={el.title} 
                                 description={el.description} 
+                                PID={el.projectIdentifier}
                                 id={el.id}
                                 className="my-auto" />
                         </div>

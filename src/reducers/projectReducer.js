@@ -1,7 +1,8 @@
-import { GET_PROJECT, POST_PROJECT } from "../actions/types";
+import { GET_PROJECT, GET_TICKETS, POST_PROJECT } from "../actions/types";
 
 const initialState = {
     projectlist: [],
+    tickets: [],
     requestPending: true
 }
 
@@ -17,6 +18,12 @@ const projectReducer = (state=initialState, action) => {
             return {
                 ...state,
                 projectlist: state.projectlist.push(action.payload),
+                requestPending: false
+            }
+        case GET_TICKETS:
+            return {
+                ...state,
+                tickets: action.payload,
                 requestPending: false
             }
         default:
