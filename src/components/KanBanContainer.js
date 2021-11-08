@@ -49,7 +49,7 @@ class KanBanContainer extends Component {
                             <h1>
                                 Project: {this.state.project ? this.state.project.title: null}
                             </h1>
-                            <AddTicket />
+                            <AddTicket PID={this.props.match.params.id} />
                         </div>
                         <div className="column-container row my-5" >
                             {columns}
@@ -60,7 +60,7 @@ class KanBanContainer extends Component {
                 return (
                     <div className="d-flex justify-content-center mx-auto">
                         <h1>No ticket found for this project</h1>
-                        <AddTicket />
+                        <AddTicket PID={this.props.match.params.id} />
                     </div>
                 );
             }

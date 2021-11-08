@@ -12,6 +12,7 @@ class Header extends Component {
 
   handleLogout() {
     this.props.logoutUser();
+    this.props.history.push("/login");
   }
 
   render() {

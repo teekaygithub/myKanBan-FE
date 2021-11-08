@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
+import { connect } from 'react-redux';
+import { postTicket } from '../actions/projectActions';
+import PropTypes from 'prop-types';
 
 class AddTicket extends Component {
     constructor(props) {
@@ -7,61 +10,49 @@ class AddTicket extends Component {
         this.state = {
             title: "",
             description: "",
+            target_date: "",
             openModal: false,
         }
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleOpenModal = this.handleOpenModal.bind(this);
-        // this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
-    // handleOpenModal() {
-    //     this.setState({
-    //         openModal: true,
-    //     })
-    // }
+    handleOpenModal() {
+        this.setState({
+            openModal: true,
+        })
+    }
 
-    // handleCloseModal() {
-    //     this.setState({
-    //         openModal: false,
-    //     })
-    // }
+    handleCloseModal() {
+        this.setState({
+            openModal: false,
+        })
+    }
 
-    // handleChange(e) {
-    //     this.setState({
-    //         [e.target.name] : e.target.value,
-    //     });
-    // }
+    handleChange(e) {
+        this.setState({
+            [e.target.name] : e.target.value,
+        });
+    }
 
-    // async handleSubmit(e) {
-    //     e.preventDefault();
-    //     const newTicket = {
-    //         title: this.state.title,
-    //         description: this.state.description,
-    //         projectId: this.props.project.id,
-    //         status: 'TODO',
-    //     }
-    //     const res = await fetch('http://localhost:8080/api/addticket', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(newTicket),
-    //     })
-
-    //     if (res.status && res.status === 201) {
-    //         console.log(`Pushing to /project/${this.props.match.params.id}`);
-    //         this.handleCloseModal();
-    //         window.location.reload();
-    //     } else {
-    //         console.log(`POST request failed: ${res.status}`);
-    //     }
-    // }
+    handleSubmit(e) {
+        e.preventDefault();
+        const newTicket = {
+            title: this.state.title,
+            description: this.state.description,
+            projectId: this.props.PID,
+            status: 'TODO',
+            target_date: this.state.target_date
+        }
+        this.props.postTicket(this.props.PID, newTicket);
+    }
 
     render () {
         return (
             <div className="my-3">
-                {/* <button
+                <button
                     type="button"
                     className="btn btn-primary"
                     onClick={this.handleOpenModal} >
@@ -70,15 +61,18 @@ class AddTicket extends Component {
                 <Modal
                     isOpen={this.state.openModal}
                     onRequestClose={this.handleCloseModal} >
-                    <h2>Create a new ticket for project {this.props.project.title}</h2>
-                    <form>
+                        
+                    <h2>Create a new ticket for project {this.props.PID}</h2>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label>Title</label>
                             <input 
                                 type="text" 
                                 name="title"
                                 className="form-control"
-                                onChange={this.handleChange}></input>
+                                onChange={this.handleChange}
+                                value={this.state.title}
+                                required></input>
                         </div>
                         <div className="form-group">
                             <label>Description</label>
@@ -86,17 +80,36 @@ class AddTicket extends Component {
                                 type="text"
                                 name="description"
                                 className="form-control"
-                                onChange={this.handleChange}></input>
+                                onChange={this.handleChange}
+                                value={this.state.description} ></input>
+                        </div>
+                        <div className="form-group">
+                            <label>Completion Date</label>
+                            <input 
+                                type="date"
+                                name="target_date"
+                                className="form-control"
+                                onChange={this.handleChange}
+                                value={this.state.target_date} ></input>
                         </div>
                         <button 
                             type="submit" 
-                            className="btn btn-primary"
-                            onClick={this.handleSubmit}>Submit</button>
+                            className="btn btn-primary" >Submit</button>
                     </form>
-                </Modal> */}
+                </Modal>
             </div>
         );
     }
 }
 
-export default AddTicket;
+AddTicket.propTypes = {
+    postTicket: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        postTicket: (PID, newTicket) => {postTicket(dispatch, PID, newTicket);}
+    };
+}
+
+export default connect(null, mapDispatchToProps)(AddTicket);
