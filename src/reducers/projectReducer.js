@@ -32,13 +32,15 @@ const projectReducer = (state=initialState, action) => {
                 tickets: state.tickets.push(action.payload),
                 requestPending: false
             }
-        // case UPDATE_TICKET:
-        //     let idx = state.tickets.find(x => x.id === action.payload.id);
-        //     return {
-        //         ...state,
-        //         tickets: state.tickets[idx] = action.payload,
-        //         requestPending: false
-        //     }
+        case UPDATE_TICKET:
+            let idx = state.tickets.findIndex(x => x.ticketIdentifier === action.payload.ticketIdentifier);
+            let temp = [...state.tickets];
+            temp[idx] = action.payload;
+            return {
+                ...state,
+                tickets: temp,
+                requestPending: false
+            }
         default:
             return state;
     }

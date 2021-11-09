@@ -3,7 +3,8 @@ import { LOGIN, ERRORS, LOGOUT } from "../actions/types";
 const initialState = {
     token: {},
     isLoggedIn: false,
-    user: {}
+    user: {},
+    errors: {}
 }
 
 export default function(state=initialState, action) {
@@ -22,6 +23,10 @@ export default function(state=initialState, action) {
                 user: {}
             }
         case ERRORS:
+            return {
+                ...state,
+                errors: action.payload
+            }
         default:
             return state;
     }

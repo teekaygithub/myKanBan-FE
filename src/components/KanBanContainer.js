@@ -19,20 +19,10 @@ class KanBanContainer extends Component {
         this.setState({
             project: this.props.projects.projectlist.find(p => p.projectIdentifier === PID)
         });
-        console.log(this.props.projects);
         this.props.getTickets(PID);
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.projects.tickets.length != this.props.projects.tickets.length) {
-    //         this.setState({
-    //             tickets: this.props.projects.tickets
-    //         });
-    //     }
-    // }
-
     render () {
-
         if (this.props.projects.requestPending) {
             return (
                 <div>
@@ -49,9 +39,7 @@ class KanBanContainer extends Component {
                 return (
                     <div className="container" id="kanban-container">
                         <div className="d-flex justify-content-around">
-                            <h1>
-                                Project: {this.state.project ? this.state.project.title: null}
-                            </h1>
+                            <h1>Project: {/*project.title*/}</h1>
                             <AddTicket PID={this.props.match.params.id} />
                         </div>
                         <div className="column-container row my-5" >

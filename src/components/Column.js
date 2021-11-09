@@ -27,7 +27,6 @@ class Column extends Component {
         if (e.target.className==="column") {
             e.target.appendChild(document.getElementById(data));
             ticket.status = this.props.status;
-            // console.log(this.props.match.params);
             this.props.updateTicket(PID, ticket);
         }
     }
@@ -55,11 +54,13 @@ class Column extends Component {
 
 Column.propTypes = {
     projects: PropTypes.object.isRequired,
-    updateTicket: PropTypes.func.isRequired
+    updateTicket: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    projects: state.projects
+    projects: state.projects,
+    errors: state.userauth.errors
 });
 
 const mapDispatchToProps = (dispatch) => {
