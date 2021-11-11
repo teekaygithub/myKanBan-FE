@@ -5,6 +5,7 @@ import '../App.css'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTickets } from '../actions/ticketActions';
+import { getOneProject } from '../actions/projectActions';
 
 class KanBanContainer extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class KanBanContainer extends Component {
             project: this.props.myprojects.projectlist.find(p => p.projectIdentifier === PID)
         });
         this.props.getTickets(PID);
+        this.props.getOneProject(PID);
     }
 
     render () {
@@ -39,7 +41,7 @@ class KanBanContainer extends Component {
                 return (
                     <div className="container" id="kanban-container">
                         <div className="d-flex justify-content-around">
-                            <h1>Project: {/*project.title*/}</h1>
+                            <h1>Project: {this.props.myprojects.lastProject.title}</h1>
                             <AddTicket PID={this.props.match.params.id} />
                         </div>
                         <div className="column-container row my-5" >
@@ -62,7 +64,8 @@ class KanBanContainer extends Component {
 KanBanContainer.propTypes = {
     myprojects: PropTypes.object.isRequired,
     mytickets: PropTypes.object.isRequired,
-    getTickets: PropTypes.func.isRequired
+    getTickets: PropTypes.func.isRequired,
+    getOneProject: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -72,7 +75,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTickets: (PID) => {getTickets(dispatch, PID);}
+        getTickets: (PID) => {getTickets(dispatch, PID);},
+        getOneProject: (PID) => {getOneProject(dispatch, PID)}
     };
 }
 

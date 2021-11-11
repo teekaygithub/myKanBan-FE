@@ -1,4 +1,4 @@
-import { GET_TICKETS, POST_TICKET } from "../actions/types"
+import { GET_TICKETS, POST_TICKET, TICKET_REQUESTING } from "../actions/types"
 
 const initialState = {
     ticketlist: [],
@@ -11,14 +11,19 @@ const ticketReducer = (state=initialState, action) => {
         case GET_TICKETS:
             return {
                 ...state,
-                tickets: action.payload,
-                requestPending: false
+                ticketlist: action.payload,
+                loading: false
             }
         case POST_TICKET:
             return {
                 ...state,
-                tickets: state.tickets.push(action.payload),
-                requestPending: false
+                ticketlist: state.tickets.push(action.payload),
+                loading: false
+            }
+        case TICKET_REQUESTING:
+            return {
+                ...state,
+                loading: true
             }
         default:
             return state;

@@ -1,8 +1,9 @@
-import { GET_PROJECT,POST_PROJECT } from "../actions/types";
+import { GET_ONE_PROJECT, GET_PROJECT,POST_PROJECT, PROJECT_REQUESTING } from "../actions/types";
 
 const initialState = {
     projectlist: [],
-    loading: true,
+    lastProject: {},
+    loading: false,
     errors: {}
 }
 
@@ -12,13 +13,24 @@ const projectReducer = (state=initialState, action) => {
             return {
                 ...state,
                 projectlist: action.payload,
-                requestPending: false
+                loading: false
+            }
+        case GET_ONE_PROJECT:
+            return {
+                ...state,
+                lastProject: action.payload,
+                loading:false
             }
         case POST_PROJECT:
             return {
                 ...state,
                 projectlist: state.projectlist.push(action.payload),
-                requestPending: false
+                loading: false
+            }
+        case PROJECT_REQUESTING:
+            return {
+                ...state,
+                loading: true
             }
         
         default:
