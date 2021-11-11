@@ -1,9 +1,9 @@
-import { GET_PROJECT, GET_TICKETS, POST_PROJECT, POST_TICKET, UPDATE_TICKET } from "../actions/types";
+import { GET_PROJECT,POST_PROJECT } from "../actions/types";
 
 const initialState = {
     projectlist: [],
-    tickets: [],
-    requestPending: true
+    loading: true,
+    errors: {}
 }
 
 const projectReducer = (state=initialState, action) => {
@@ -20,27 +20,7 @@ const projectReducer = (state=initialState, action) => {
                 projectlist: state.projectlist.push(action.payload),
                 requestPending: false
             }
-        case GET_TICKETS:
-            return {
-                ...state,
-                tickets: action.payload,
-                requestPending: false
-            }
-        case POST_TICKET:
-            return {
-                ...state,
-                tickets: state.tickets.push(action.payload),
-                requestPending: false
-            }
-        case UPDATE_TICKET:
-            let idx = state.tickets.findIndex(x => x.ticketIdentifier === action.payload.ticketIdentifier);
-            let temp = [...state.tickets];
-            temp[idx] = action.payload;
-            return {
-                ...state,
-                tickets: temp,
-                requestPending: false
-            }
+        
         default:
             return state;
     }

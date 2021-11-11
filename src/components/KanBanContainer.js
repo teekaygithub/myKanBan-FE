@@ -4,7 +4,7 @@ import AddTicket from './AddTicket';
 import '../App.css'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getTickets } from '../actions/projectActions';
+import { getTickets } from '../actions/ticketActions';
 
 class KanBanContainer extends Component {
     constructor(props) {
@@ -17,23 +17,23 @@ class KanBanContainer extends Component {
     componentDidMount() {
         const PID = this.props.match.params.id;
         this.setState({
-            project: this.props.projects.projectlist.find(p => p.projectIdentifier === PID)
+            project: this.props.myprojects.projectlist.find(p => p.projectIdentifier === PID)
         });
         this.props.getTickets(PID);
     }
 
     render () {
-        if (this.props.projects.requestPending) {
+        if (this.props.myprojects.loading) {
             return (
                 <div>
                     <h1>Loading...</h1>
                 </div>
             );
         } else {
-            if (this.props.projects.tickets.length > 0) {
+            if (this.props.mytickets.ticketlist.length > 0) {
                 const status = ["TODO", "INPROGRESS", "DONE"];
                 const columns = status.map(stat => (<Column 
-                    tickets={this.props.projects.tickets.filter(x => x.status === stat)} 
+                    tickets={this.props.mytickets.ticketlist.filter(x => x.status === stat)} 
                     status={stat}
                     history={this.props.history} />));
                 return (
@@ -60,12 +60,14 @@ class KanBanContainer extends Component {
 }
 
 KanBanContainer.propTypes = {
-    projects: PropTypes.object.isRequired,
+    myprojects: PropTypes.object.isRequired,
+    mytickets: PropTypes.object.isRequired,
     getTickets: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    projects: state.projects
+    myprojects: state.myprojects,
+    mytickets: state.mytickets
 });
 
 const mapDispatchToProps = (dispatch) => {

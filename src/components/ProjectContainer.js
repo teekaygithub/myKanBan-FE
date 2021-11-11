@@ -18,9 +18,9 @@ class ProjectContainer extends Component {
     }
 
     render () {
-        if (!this.props.projects.requestPending) {
-            if (this.props.projects.projectlist.length > 0) {
-                const projectElem = this.props.projects.projectlist.map((el, index) => {
+        if (!this.props.myprojects.loading) {
+            if (this.props.myprojects.projectlist.length > 0) {
+                const projectElem = this.props.myprojects.projectlist.map((el, index) => {
                     return (
                         <div key={index}>
                             <ProjectCard 
@@ -79,12 +79,12 @@ class ProjectContainer extends Component {
 
 ProjectContainer.propTypes = {
     getProjects: PropTypes.func.isRequired,
-    projects: PropTypes.object.isRequired,
+    myprojects: PropTypes.object.isRequired,
     userauth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    projects: state.projects,
+    myprojects: state.myprojects,
     userauth: state.userauth
 });
 

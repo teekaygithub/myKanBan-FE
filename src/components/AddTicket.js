@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { postTicket } from '../actions/projectActions';
+import { postTicket } from '../actions/ticketActions';
 import PropTypes from 'prop-types';
 
 class AddTicket extends Component {

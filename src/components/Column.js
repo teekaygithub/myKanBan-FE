@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Ticket from './Ticket';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateTicket } from '../actions/projectActions';
+import { updateTicket } from '../actions/ticketActions';
 
 class Column extends Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class Column extends Component {
         let data = e.dataTransfer.getData("key");
         let TID = e.dataTransfer.getData('TID');
         let PID = e.dataTransfer.getData('PID');
-        let ticket = this.props.projects.tickets.find(x => x.ticketIdentifier === TID);
+        let ticket = this.props.mytickets.ticketlist.find(x => x.ticketIdentifier === TID);
         if (e.target.className==="column") {
             e.target.appendChild(document.getElementById(data));
             ticket.status = this.props.status;
@@ -53,13 +53,15 @@ class Column extends Component {
 }
 
 Column.propTypes = {
-    projects: PropTypes.object.isRequired,
+    myprojects: PropTypes.object.isRequired,
+    mytickets: PropTypes.object.isRequired,
     updateTicket: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    projects: state.projects,
+    myprojects: state.myprojects,
+    mytickets: state.mytickets,
     errors: state.userauth.errors
 });
 
