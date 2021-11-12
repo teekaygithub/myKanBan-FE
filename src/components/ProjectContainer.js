@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProjects } from '../actions/projectActions';
+import Spinner from './Spinner';
 
 class ProjectContainer extends Component {
     constructor(props) {
@@ -69,8 +70,8 @@ class ProjectContainer extends Component {
             }
         } else {
             return(
-                <div>
-                    <h1>Loading...</h1>
+                <div className="dashboard-loading">
+                    <Spinner />
                 </div>
             );
         }

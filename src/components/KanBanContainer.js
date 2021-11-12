@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTickets } from '../actions/ticketActions';
 import { getOneProject } from '../actions/projectActions';
+import Spinner from './Spinner';
 
 class KanBanContainer extends Component {
     constructor(props) {
@@ -27,8 +28,8 @@ class KanBanContainer extends Component {
     render () {
         if (this.props.myprojects.loading) {
             return (
-                <div>
-                    <h1>Loading...</h1>
+                <div style={{height: "100vh", textAlign: "center"}}>
+                    <Spinner />
                 </div>
             );
         } else {

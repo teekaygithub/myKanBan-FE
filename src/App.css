@@ -42,6 +42,55 @@
   font-weight: bold;
 }
 
+.dashboard-loading {
+  margin: 0 auto;
+  text-align: center;
+  height: 100vh;
+}
+
+.spinner-container {
+  border: .25rem groove;
+  border-radius: 10%;
+  position: relative;
+  height: 16rem;
+  width: 16rem;
+  left: calc((100% - 16rem)/2);
+  top: 25%;
+}
+
+.spinner {
+  color: #007bff;
+  border: 0.5rem solid;
+  border-radius: 50%;
+  border-right-color: transparent;
+  display: inline-block;
+  height: 10rem;
+  width: 10rem;
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  animation-name: spin;
+  animation-duration: 0.75s;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(90deg);
+  }
+  25% {
+    transform: rotate(180deg);
+  }
+  50% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 footer {
   background-color: dimgray;
   padding: 1rem;
