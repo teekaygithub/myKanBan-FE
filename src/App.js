@@ -17,6 +17,7 @@ import store from './store';
 import Register from './components/Register';
 import { LOGIN, LOGOUT } from './actions/types';
 import { setRequestHeader } from './actions/jwtUtility';
+import { isTokenExpired } from './actions/jwtUtility';
 
 class App extends Component {
   constructor(props) {
@@ -26,11 +27,21 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem('jwt');
     if (token) {
-      setRequestHeader(token);
-      store.dispatch({
-        type: LOGIN,
-        payload: localStorage.getItem('jwt')
-      })
+      let isExpired = isTokenExpired(token);
+      console.log(`Is token expired? ${isExpired}`);
+      if (isExpired) {
+        setRequestHeader(false);
+        localStorage.removeItem('jwt');
+        store.dispatch({
+          type: LOGOUT
+        });
+      } else {
+        setRequestHeader(token);
+        store.dispatch({
+          type: LOGIN,
+          payload: localStorage.getItem('jwt')
+        });
+      }
     } else {
       setRequestHeader(false);
       store.dispatch({
