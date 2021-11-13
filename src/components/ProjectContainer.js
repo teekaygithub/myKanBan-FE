@@ -12,9 +12,6 @@ class ProjectContainer extends Component {
     }
 
     componentDidMount() {
-        if (this.props.userauth.isLoggedIn === false) {
-            this.props.history.push("/login");
-        }
         this.props.getProjects();
     }
 

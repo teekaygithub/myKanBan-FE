@@ -30,7 +30,7 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.userauth.isLoggedIn !== this.props.userauth.isLoggedIn) {
+        if (this.props.userauth.isLoggedIn && this.props.userauth.loading === false) {
             console.log("Logged in, redirecting to dashboard");
             this.props.history.push("/dashboard")
         }

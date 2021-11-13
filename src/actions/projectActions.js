@@ -8,8 +8,12 @@ export const getProjects = async (dispatch) => {
             type: PROJECT_REQUESTING
         });
 
-        const res = await axios.get('http://localhost:8080/api/projects/all', headerConfig);
-        await new Promise(r => setTimeout(r, 5000)); // Simulated latency
+        const res = await axios.get(
+            'http://localhost:8080/api/projects/all', 
+            {headers: 
+                {'Authorization': localStorage.getItem('jwt')}
+            });
+        await new Promise(r => setTimeout(r, 2000)); // Simulated latency
         
         dispatch({
             type: GET_PROJECT,
@@ -30,9 +34,13 @@ export const getOneProject = async (dispatch, PID) => {
             type: PROJECT_REQUESTING
         });
 
-        const res = await axios.get(`http://localhost:8080/api/projects/project?projectIdentifier=${PID}`, headerConfig);
+        const res = await axios.get(
+            `http://localhost:8080/api/projects/project?projectIdentifier=${PID}`, 
+            {headers: 
+                {'Authorization': localStorage.getItem('jwt')}
+            });
         console.log(res);
-        await new Promise(r => setTimeout(r, 5000));
+        await new Promise(r => setTimeout(r, 2000));
 
         dispatch({
             type: GET_ONE_PROJECT,
@@ -52,7 +60,12 @@ export const postProject = async (dispatch, newProject, history) => {
             type: PROJECT_REQUESTING
         });
 
-        const res = await axios.post('http://localhost:8080/api/projects/addproject', newProject, headerConfig);
+        const res = await axios.post(
+            'http://localhost:8080/api/projects/addproject', 
+            newProject, 
+            {headers: 
+                {'Authorization': localStorage.getItem('jwt')}
+            });
         history.push("/dashboard");
         
         dispatch({

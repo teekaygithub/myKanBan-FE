@@ -4,6 +4,7 @@ const Spinner = () => {
             <div className="spinner">
                 <span style={{display: "none"}}>Loading</span>
             </div>
+            <h3>Loading...</h3>
         </div>
     );
 }

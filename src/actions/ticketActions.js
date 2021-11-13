@@ -8,7 +8,11 @@ export const getTickets = async (dispatch, PID) => {
             type: TICKET_REQUESTING
         });
 
-        const res = await axios.get(`http://localhost:8080/api/projects/alltickets?projectIdentifier=${PID}`, headerConfig);
+        const res = await axios.get(
+            `http://localhost:8080/api/projects/alltickets?projectIdentifier=${PID}`, 
+            {headers: 
+                {'Authorization': localStorage.getItem('jwt')}
+            });
         
         dispatch({
             type: GET_TICKETS,
@@ -29,7 +33,12 @@ export const postTicket = async(dispatch, PID, newTicket) => {
             type: TICKET_REQUESTING
         });
 
-        const res = await axios.post(`http://localhost:8080/api/projects/ticket?projectIdentifier=${PID}`, newTicket, headerConfig);
+        const res = await axios.post(
+            `http://localhost:8080/api/projects/ticket?projectIdentifier=${PID}`, 
+            newTicket, 
+            {headers: 
+                {'Authorization': localStorage.getItem('jwt')}
+            });
         
         dispatch({
             type: POST_TICKET,
@@ -45,7 +54,12 @@ export const postTicket = async(dispatch, PID, newTicket) => {
 
 export const updateTicket = async (dispatch, PID, ticket) => {
     try {
-        await axios.post(`http://localhost:8080/api/projects/ticket?projectIdentifier=${PID}`, ticket, headerConfig);
+        await axios.post(
+            `http://localhost:8080/api/projects/ticket?projectIdentifier=${PID}`, 
+            ticket, 
+            {headers: 
+                {'Authorization': localStorage.getItem('jwt')}
+            });
         dispatch({
             type: ERRORS,
             payload: {}

@@ -1,5 +1,6 @@
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const AUTH_REQUEST = 'AUTH_REQUEST';
 
 export const GET_PROJECT = 'GET_PROJECT';
 export const GET_ONE_PROJECT = 'GET_ONE_PROJECT';
