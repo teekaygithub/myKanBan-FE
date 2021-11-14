@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ERRORS, GET_ONE_PROJECT, GET_PROJECT, POST_PROJECT, PROJECT_REQUESTING } from './types';
-import { headerConfig } from './jwtUtility';
+import { API } from '../constants';
 
 export const getProjects = async (dispatch) => {
     try {
@@ -9,7 +9,7 @@ export const getProjects = async (dispatch) => {
         });
 
         const res = await axios.get(
-            'http://localhost:8080/api/projects/all', 
+            `${API}api/projects/all`, 
             {headers: 
                 {'Authorization': localStorage.getItem('jwt')}
             });
@@ -35,7 +35,7 @@ export const getOneProject = async (dispatch, PID) => {
         });
 
         const res = await axios.get(
-            `http://localhost:8080/api/projects/project?projectIdentifier=${PID}`, 
+            `${API}api/projects/project?projectIdentifier=${PID}`, 
             {headers: 
                 {'Authorization': localStorage.getItem('jwt')}
             });
@@ -61,7 +61,7 @@ export const postProject = async (dispatch, newProject, history) => {
         });
 
         const res = await axios.post(
-            'http://localhost:8080/api/projects/addproject', 
+            `${API}api/projects/addproject`, 
             newProject, 
             {headers: 
                 {'Authorization': localStorage.getItem('jwt')}

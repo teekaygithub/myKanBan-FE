@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setRequestHeader } from './jwtUtility';
 import { LOGIN, ERRORS, LOGOUT, AUTH_REQUEST } from './types';
+import { API } from '../constants';
 
 export const registerUser = async (dispatch, newUser, history) => {
     try {
@@ -8,7 +9,7 @@ export const registerUser = async (dispatch, newUser, history) => {
             type: AUTH_REQUEST
         });
 
-        const res = await axios.post(`http://localhost:8080/api/users/register`, newUser);
+        const res = await axios.post(`${API}api/users/register`, newUser);
         history.push("/");
         
         dispatch({
@@ -29,7 +30,7 @@ export const loginUser =  async (dispatch, credentials) => {
             type: AUTH_REQUEST
         });
 
-        const res = await axios.post(`http://localhost:8080/api/users/login?username=${credentials.username}&password=${credentials.password}`);
+        const res = await axios.post(`${API}api/users/login?username=${credentials.username}&password=${credentials.password}`);
         // Store the JWT in browser storage and the axios request header
         const token = res.data.access_token;
         localStorage.setItem("jwt", token);
