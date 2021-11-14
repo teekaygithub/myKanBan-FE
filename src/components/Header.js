@@ -17,38 +17,28 @@ class Header extends Component {
 
   render() {
     const privateHeader = (
-      <nav className="navbar bg-dark">
-        <ul className='navbar-nav'>
-          <li className='nav-item'>
-            <Link to="/">Home</Link>
-          </li>
-          <li className='nav-item'>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li className='nav-item'>
-            <a href="" onClick={this.handleLogout} >Log Out</a>
-          </li>
-        </ul>
-      </nav>
+      <>
+        <Link to="/dashboard">Dashboard</Link>
+        <a href="" onClick={this.handleLogout} >Log Out</a>
+      </>
     );
 
     const publicHeader = (
-      <nav className="navbar bg-dark">
-        <ul className='navbar-nav'>
-          <li className='nav-item'>
-            <Link to="/">Home</Link>
-          </li>
-          <li className='nav-item'>
-            <Link to="/register">Register</Link>
-          </li>
-          <li className='nav-item'>
-            <Link to="/login">Log In</Link>
-          </li>
-        </ul>
-      </nav>
+      <>
+        <Link to="/login">Log In</Link>
+        <Link to="/register" id="register-button" >Register</Link>
+      </>
     );
+
     let presentation = this.props.userauth.isLoggedIn ? privateHeader : publicHeader;
-    return(presentation);
+    return(
+      <div className="header-bar">
+        <Link to="/" className="logo" >HOME</Link>
+        <div className="header-menu" >
+          {presentation}
+        </div>
+      </div>
+    );
   }
 }
 

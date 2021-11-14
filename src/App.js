@@ -2,9 +2,10 @@ import './App.css';
 import React, {Component} from 'react';
 import {
   Switch,
-  Route,
-  Redirect
+  Route
 } from 'react-router-dom'
+
+// Custom components
 import Header from "./components/Header";
 import ProjectContainer from "./components/ProjectContainer";
 import KanBanContainer from "./components/KanBanContainer";
@@ -13,8 +14,10 @@ import Welcome from './components/Welcome';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import { Provider } from 'react-redux';
-import store from './store';
 import Register from './components/Register';
+
+// React - Redux
+import store from './store';
 import { LOGIN, LOGOUT } from './actions/types';
 import { setRequestHeader } from './actions/jwtUtility';
 import { isTokenExpired } from './actions/jwtUtility';
