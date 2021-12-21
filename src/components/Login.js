@@ -38,38 +38,34 @@ class Login extends Component {
 
     render () {
         return (
-            <div className="container my-5">
-                <div style={{textAlign:"center"}} className="jumbotron">
-                    <h1>Thank you for trying out myKanBan!</h1>
-                    <p>Authentication is still under development, so please use the following credential below:</p>
+            <div id="login-container">
+                <div id="login-banner">
+                    <h3>Thank you for trying out myKanBan!</h3>
+                    <p>Feel free to register for an account, or use the following credential below:</p>
                     <p>User e-mail address: <strong>test@test.com</strong></p>
                     <p>Password: <strong>1234</strong></p>
                 </div>
-                <h3>Log In</h3>
-                <form>
-                    <div className="form-group">
-                        <label>Email</label>
+                
+                <div id="login-form">
+                    <h3>Log In to MyKanBan</h3>
+                    <form>
                         <input 
                             type="email"
                             name="username"
-                            className="form-control"
+                            placeholder='Email Address'
                             onChange={this.handleChange}
                             value={this.state.email} />
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
                         <input 
                             type="password"
                             name="password"
-                            className="form-control"
+                            placeholder='Password'
                             onChange={this.handleChange}
                             value={this.state.password} />
-                    </div>
-                    <button 
-                        type="submit" 
-                        className="btn btn-primary"
-                        onClick={this.handleSubmit}>Login</button>
-                </form>
+                        <button 
+                            type="submit" 
+                            onClick={this.handleSubmit}>Login</button>
+                    </form>
+                </div>
             </div>
         );
     }
