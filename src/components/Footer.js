@@ -7,8 +7,14 @@ function Footer() {
                 <p>TBD: Social Media Links</p>
             </div>
             <div id="footer-links">
-                <Link to="/about">About</Link><br />
-                <Link to="/">Contact</Link>
+                <ul>
+                    <li>
+                        <Link to="/about">About</Link><br />
+                    </li>
+                    <li>
+                        <Link to="/">Contact</Link>
+                    </li>
+                </ul>
             </div>
         </footer>
     );

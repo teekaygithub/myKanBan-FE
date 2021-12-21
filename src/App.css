@@ -1,6 +1,40 @@
+/* COMMON */
+
 .App {
   box-sizing: border-box;
 }
+
+body {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  line-height: 1.5;
+  margin: 1rem auto 0;
+}
+
+img {
+  display: block;
+  margin: 1rem auto;
+  width: 80%;
+}
+
+li {
+  list-style-type: none;
+  display: list-item;
+  float: left;
+  margin-right: 1rem;
+  min-width: 3rem;
+}
+
+li a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  padding: 1rem;
+}
+
+/* NAVIGATION BAR */
 
 .header-bar {
   background-color: rgb(0, 121, 191);
@@ -42,8 +76,19 @@
   border-radius: 0.5rem;
 }
 
-#section-banner {
-  text-align: center;
+/* FOOTER */
+footer {
+  margin-bottom: 0;
+}
+
+/* WELCOME PAGE */
+
+section {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 70vw;
+  margin: 1rem auto;
+  padding: 1rem;
 }
 
 #main-image {
@@ -51,13 +96,16 @@
   max-height: 100%;
 }
 
-#feature-description p {
-  color: gray;
+#section-banner {
+  display: block;
 }
 
-#feature-image img {
-  max-width: 100%;
-  max-height: 100%;
+.feature-description {
+  max-width: 40%;
+}
+
+.feature-description p{
+  color: gray;
 }
 
 #kanban-container {
