@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { registerUser } from '../actions/authActions';
+import '../registerpage.css';
+import {Link} from 'react-router-dom';
 
 class Register extends Component {
     constructor(props) {
@@ -33,46 +35,40 @@ class Register extends Component {
 
     render () {
         return (
-            <div className="container my-5 w-50">
-                <div style={{textAlign:"center"}} className="jumbotron">
+            <div id="register-container">
+                <div id="register-banner">
                     <h1>Thank you for trying out myKanBan!</h1>
+                    <p>You are also welcome to use an existing guest account:</p>
+                    <p>Email: test@test.com</p>
+                    <p>Password: 1234</p>
+                    <div>
+                        <Link to="/login">Login Page</Link>
+                    </div>
                 </div>
-                <h3>Register new user</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>Email</label>
+                <div id="register-form">
+                    <h3>Create your new account</h3>
+                    <form onSubmit={this.handleSubmit}>
                         <input 
                             type="email"
                             name="username"
-                            className="form-control"
-                            style={{border: "1px solid #000"}}
+                            placeholder='Email address'
                             onChange={this.handleChange}
                             value={this.state.email} />
-                    </div>
-                    <div className = "form-group">
-                        <label>Full name</label>
                         <input
                             type="text"
                             name="fullname"
-                            className="form-control"
-                            style={{border: "1px solid #000"}}
+                            placeholder='Your name'
                             onChange={this.handleChange}
                             value={this.state.fullname} />
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
                         <input 
                             type="password"
                             name="password"
-                            className="form-control"
-                            style={{border: "1px solid #000"}}
+                            placeholder='Password'
                             onChange={this.handleChange}
                             value={this.state.password} />
-                    </div>
-                    <button 
-                        type="submit" 
-                        className="btn btn-primary">Submit</button>
-                </form>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         );
     }
