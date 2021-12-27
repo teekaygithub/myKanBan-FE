@@ -29,6 +29,7 @@
     width: 25%;
     border: 1px solid;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .column-name {
@@ -38,9 +39,19 @@
 
 .ticket {
     background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px rgba(0,0,0,0.15);
     margin: inherit;
-    width: 95%;
+    padding: 0.5rem;
+    max-width: 95%;
     min-height: 100px;
+    overflow:hidden;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.ticket span {
+    display: block;
 }
 
 .kanban-addticket-button-container {

@@ -15,13 +15,12 @@ class Ticket extends Component {
     render () {
         return (
             <div
-                className="card ticket mx-auto my-2 px-1 py-1"
+                className="ticket"
                 draggable={true}
                 onDragStart={this.handleDrag}
                 id={this.props.ticket.id} >
                 <span><strong>{this.props.ticket.ticketIdentifier}</strong></span>
                 <span><strong>{this.props.ticket.title}</strong></span>
-                <span>Status: {this.props.ticket.status}</span>
             </div>
         );
     }
