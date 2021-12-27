@@ -1,0 +1,48 @@
+.kanban-container {
+    max-width: 80vw;
+    margin: inherit;
+    padding: 1rem;
+}
+
+.kanban-top {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.kanban-project-name {
+    text-align: left;
+}
+
+.column-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    padding: inherit;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    min-height: 55vh;
+    background-color: rgb(200, 200, 200);
+    margin: 0 0.5rem;
+    width: 25%;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.column-name {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.ticket {
+    background-color: #fff;
+    margin: inherit;
+    width: 95%;
+    min-height: 100px;
+}
+
+.kanban-addticket-button-container {
+    width: 20%;
+}

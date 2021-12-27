@@ -43,7 +43,7 @@ class Column extends Component {
                 className="column"
                 onDragOver={this.allowDrop}
                 onDrop={this.handleDrop} >
-                <h3 className="mx-auto py-2">
+                <h3 className="column-name">
                     {this.props.status}
                 </h3>
                 {ticketComponents}

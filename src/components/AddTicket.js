@@ -51,7 +51,7 @@ class AddTicket extends Component {
 
     render () {
         return (
-            <div className="my-3">
+            <div className="kanban-addticket-button-container">
                 <button
                     type="button"
                     className="btn btn-primary"

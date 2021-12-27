@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Column from './Column';
 import AddTicket from './AddTicket';
-import '../App.css'
+import '../App.css';
+import '../kanban.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTickets } from '../actions/ticketActions';
@@ -40,12 +41,14 @@ class KanBanContainer extends Component {
                     status={stat}
                     history={this.props.history} />));
                 return (
-                    <div className="container" id="kanban-container">
-                        <div className="d-flex justify-content-around">
-                            <h1>Project: {this.props.myprojects.lastProject.title}</h1>
+                    <div className="kanban-container">
+                        <div className="kanban-top">
+                            <div class="kanban-project-name">
+                                <h1>Project: {this.props.myprojects.lastProject.title}</h1>
+                            </div>
                             <AddTicket PID={this.props.match.params.id} />
                         </div>
-                        <div className="column-container row my-5" >
+                        <div className="column-container" >
                             {columns}
                         </div>
                     </div>
