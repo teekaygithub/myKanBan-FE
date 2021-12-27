@@ -31,6 +31,12 @@ class Column extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.mytickets != this.props.mytickets) {
+            window.location.reload();
+        }
+    }
+
     render () {
         const ticketComponents = this.props.tickets.length > 0 ? 
             this.props.tickets.map((ticket, index) => (

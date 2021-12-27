@@ -43,7 +43,7 @@ class KanBanContainer extends Component {
                 return (
                     <div className="kanban-container">
                         <div className="kanban-top">
-                            <div class="kanban-project-name">
+                            <div className="kanban-project-name">
                                 <h1>Project: {this.props.myprojects.lastProject.title}</h1>
                             </div>
                             <AddTicket PID={this.props.match.params.id} />

@@ -35,13 +35,15 @@
 .column-name {
     text-align: left;
     padding-left: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .ticket {
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 0 1px rgba(0,0,0,0.15);
-    margin: inherit;
+    margin: 0.5rem;
     padding: 0.5rem;
     max-width: 95%;
     min-height: 100px;

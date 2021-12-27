@@ -28,7 +28,7 @@ class AddTicket extends Component {
     handleCloseModal() {
         this.setState({
             openModal: false,
-        })
+        });
     }
 
     handleChange(e) {
@@ -47,6 +47,9 @@ class AddTicket extends Component {
             target_date: this.state.target_date
         }
         this.props.postTicket(this.props.PID, newTicket);
+        this.setState({
+            openModal: false
+        });
     }
 
     render () {
