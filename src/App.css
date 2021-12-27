@@ -61,6 +61,23 @@ button {
   box-shadow: 1px 2px rgba(136, 136, 136, 0.15);
 }
 
+.modal-custom {
+  position: absolute;
+  inset: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+  overflow: auto;
+  border-radius: 4px;
+  outline: currentColor none medium;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 35vw;
+}
+
+.modal-form {
+  margin-top: 5rem;
+}
+
 /* NAVIGATION BAR */
 
 .header-bar {
@@ -68,9 +85,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
   top: 0;
-  z-index: 100;
 }
 
 .logo {

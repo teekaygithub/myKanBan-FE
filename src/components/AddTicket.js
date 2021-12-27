@@ -63,36 +63,37 @@ class AddTicket extends Component {
                 </button>
                 <Modal
                     isOpen={this.state.openModal}
-                    onRequestClose={this.handleCloseModal} >
+                    onRequestClose={this.handleCloseModal}
+                    className="modal-custom" >
                         
-                    <h2>Create a new ticket for project {this.props.PID}</h2>
-                    <form onSubmit={this.handleSubmit}>
+                    <h2>New ticket for project {this.props.PID}</h2>
+                    <form className="modal-form" onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <label>Title</label>
                             <input 
                                 type="text" 
                                 name="title"
                                 className="form-control"
                                 onChange={this.handleChange}
                                 value={this.state.title}
+                                placeholder='Title (Required)'
                                 required></input>
                         </div>
                         <div className="form-group">
-                            <label>Description</label>
                             <input 
                                 type="text"
                                 name="description"
                                 className="form-control"
                                 onChange={this.handleChange}
+                                placeholder='Description'
                                 value={this.state.description} ></input>
                         </div>
                         <div className="form-group">
-                            <label>Completion Date</label>
                             <input 
                                 type="date"
                                 name="target_date"
                                 className="form-control"
                                 onChange={this.handleChange}
+                                placeholder='Target Completion Date (mm/dd/yyyy)'
                                 value={this.state.target_date} ></input>
                         </div>
                         <button 
