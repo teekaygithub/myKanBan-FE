@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProjects } from '../actions/projectActions';
 import Spinner from './Spinner';
+import '../dashboard.css';
 
 class ProjectContainer extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class ProjectContainer extends Component {
             if (this.props.myprojects.projectlist.length > 0) {
                 const projectElem = this.props.myprojects.projectlist.map((el, index) => {
                     return (
-                        <div key={index}>
+                        <div key={index} className="project-card">
                             <ProjectCard 
                                 title={el.title} 
                                 description={el.description} 
@@ -32,7 +33,7 @@ class ProjectContainer extends Component {
                 });
                 return (
                     <div className="container">
-                        <div className="d-flex">
+                        <div id="project-banner">
                             <h1 
                                 className="my-3"
                                 style={{textAlign:'center'}}>
@@ -40,11 +41,12 @@ class ProjectContainer extends Component {
                             </h1>
                             <div className="d-flex justify-content-end w-75 my-4">
                                 <Link to="/addproject" className="mr-0 my-auto">
-                                    <button className="btn btn-primary">+NEW PROJECT</button>
+                                    <button>+NEW PROJECT</button>
                                 </Link>
                             </div>
                         </div>
-                        <div 
+                        <div
+                            id="project-container" 
                             className="container-fluid 
                                         card-deck 
                                         py-5 
