@@ -17,7 +17,7 @@ const ticketReducer = (state=initialState, action) => {
         case POST_TICKET:
             return {
                 ...state,
-                ticketlist: state.tickets.push(action.payload),
+                ticketlist: [...state.ticketlist, action.payload],
                 loading: false
             }
         case TICKET_REQUESTING:

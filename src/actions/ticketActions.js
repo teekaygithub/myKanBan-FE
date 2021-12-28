@@ -45,6 +45,7 @@ export const postTicket = async(dispatch, PID, newTicket) => {
             payload: res.data
         });
     } catch (err) {
+        console.log(err);
         dispatch({
             type: ERRORS,
             payload: err
