@@ -5,11 +5,11 @@ var ProjectCard = (props) => {
     const link = "/project/" + props.PID;
     return (
         <>
-            <div class="card-header">
+            <div className="card-header">
                 <h2>{props.title}</h2>
             </div>
-            <div class="card-footer">
-                <Link to={link} class="card-button">Board View</Link>
+            <div className="card-footer">
+                <Link to={link} className="card-button">Board View</Link>
             </div>
             
         </>

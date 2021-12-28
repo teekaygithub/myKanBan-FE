@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import ProjectCard from './ProjectCard';
-import {Link} from 'react-router-dom';
+import AddProject from './AddProject';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProjects } from '../actions/projectActions';
@@ -40,19 +40,11 @@ class ProjectContainer extends Component {
                                 Your Active Projects
                             </h1>
                             <div className="d-flex justify-content-end w-75 my-4">
-                                <Link to="/addproject" className="mr-0 my-auto">
-                                    <button>+NEW PROJECT</button>
-                                </Link>
+                                <AddProject history={this.props.history} />
                             </div>
                         </div>
                         <div
-                            id="project-container" 
-                            className="container-fluid 
-                                        card-deck 
-                                        py-5 
-                                        justify-content-center
-                                        w-100
-                                        mx-auto">
+                            id="project-container" >
                             {projectElem}
                         </div>
                     </div>
@@ -61,9 +53,7 @@ class ProjectContainer extends Component {
                 return (
                     <div className="container">
                         <h1>Let's get started with a project!</h1>
-                        <Link to="/addproject" className="mr-0 my-auto">
-                            <button className="btn btn-primary">+NEW PROJECT</button>
-                        </Link>
+                        <AddProject />
                     </div>
                 );
             }

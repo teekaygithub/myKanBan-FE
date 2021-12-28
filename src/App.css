@@ -72,6 +72,7 @@ button {
   margin: 0 auto;
   padding: 20px;
   max-width: 35vw;
+  max-height: 50vh;
 }
 
 .modal-form {

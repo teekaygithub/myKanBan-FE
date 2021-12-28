@@ -24,7 +24,7 @@ const projectReducer = (state=initialState, action) => {
         case POST_PROJECT:
             return {
                 ...state,
-                projectlist: state.projectlist.push(action.payload),
+                projectlist: [...state.projectlist, action.payload],
                 loading: false
             }
         case PROJECT_REQUESTING:

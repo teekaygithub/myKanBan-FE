@@ -54,7 +54,7 @@ export const getOneProject = async (dispatch, PID) => {
     }
 }
 
-export const postProject = async (dispatch, newProject, history) => {
+export const postProject = async (dispatch, newProject) => {
     try {
         dispatch({
             type: PROJECT_REQUESTING
@@ -66,7 +66,6 @@ export const postProject = async (dispatch, newProject, history) => {
             {headers: 
                 {'Authorization': localStorage.getItem('jwt')}
             });
-        history.push("/dashboard");
         
         dispatch({
             type: POST_PROJECT,

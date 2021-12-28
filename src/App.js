@@ -9,7 +9,6 @@ import {
 import Header from "./components/Header";
 import ProjectContainer from "./components/ProjectContainer";
 import KanBanContainer from "./components/KanBanContainer";
-import AddProject from "./components/AddProject";
 import Welcome from './components/Welcome';
 import Footer from './components/Footer';
 import Login from './components/Login';
@@ -69,8 +68,6 @@ class App extends Component {
             <Route exact path="/dashboard" component={ProjectContainer} />
             
             <Route exact path = "/project/:id" component={KanBanContainer} />
-
-            <Route exact path="/addproject" component={AddProject} />
             
             <Route exact path="/about">
               <About />
