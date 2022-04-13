@@ -12,6 +12,15 @@
     width: 60vw;
 }
 
+#project-add-button {
+    transition: all 0.2s ease-in-out;
+    padding: 1rem 0.3rem;
+}
+
+#project-add-button:hover {
+    background-color: rgb(100,123,255);
+}
+
 .project-card {
     border: 1px solid #b9b4b4;
     border-radius: 0.5rem;
@@ -44,4 +53,14 @@
 .card-button:hover {
     background-color: rgb(100,123,255);
     padding: 0.6rem;
+}
+
+@media screen and (min-width: 480px) and (max-width: 990px) {
+    #project-banner {
+        width: 80%;
+    }
+
+    #project-container {
+        width: 90vw;
+    }
 }

@@ -53,7 +53,7 @@ class AddProject extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleOpenModal}>+NEW PROJECT</button>
+                <button id="project-add-button" onClick={this.handleOpenModal}>+NEW PROJECT</button>
                 <Modal
                     isOpen={this.state.openModal}
                     onRequestClose={this.handleCloseModal}
