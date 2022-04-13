@@ -1,5 +1,6 @@
 .kanban-container {
     max-width: 80vw;
+    min-height: 80vh;
     margin: inherit;
     padding: 1rem;
 }
@@ -56,6 +57,15 @@
     display: block;
 }
 
+.ticket-details-button {
+    width: 30%;
+    padding: 0;
+    font-size: 1.2rem;
+    border-radius: 0;
+    margin-top: 0.5rem;
+}
+
 .kanban-addticket-button-container {
     width: 20%;
+    margin: 0 auto;
 }

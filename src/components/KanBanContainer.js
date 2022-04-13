@@ -55,7 +55,7 @@ class KanBanContainer extends Component {
                 );
             } else {
                 return (
-                    <div className="d-flex justify-content-center mx-auto">
+                    <div className="kanban-container">
                         <h1>No ticket found for this project</h1>
                         <AddTicket PID={this.props.match.params.id} />
                     </div>

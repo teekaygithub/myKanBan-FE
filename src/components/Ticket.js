@@ -21,6 +21,7 @@ class Ticket extends Component {
                 id={this.props.ticket.id} >
                 <span><strong>{this.props.ticket.ticketIdentifier}</strong></span>
                 <span><strong>{this.props.ticket.title}</strong></span>
+                <button class="ticket-details-button">View</button>
             </div>
         );
     }
