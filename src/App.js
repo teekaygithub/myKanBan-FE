@@ -1,5 +1,5 @@
 import './App.css';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Switch,
   Route
@@ -11,7 +11,7 @@ import ProjectContainer from "./components/ProjectContainer";
 import KanBanContainer from "./components/KanBanContainer";
 import Welcome from './components/Welcome';
 import Footer from './components/Footer';
-import Login from './components/Login';
+import { Login } from './components/Login';
 import { Provider } from 'react-redux';
 import Register from './components/Register';
 import About from './components/About';
@@ -63,13 +63,13 @@ class App extends Component {
             <Route exact path="/" component={Welcome} />
 
             <Route exact path="/register" component={Register} />
-            
+
             <Route exact path="/login" component={Login} />
 
             <Route exact path="/dashboard" component={ProjectContainer} />
-            
-            <Route exact path = "/project/:id" component={KanBanContainer} />
-            
+
+            <Route exact path="/project/:id" component={KanBanContainer} />
+
             <Route exact path="/about">
               <About />
             </Route>
