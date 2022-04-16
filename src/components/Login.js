@@ -6,8 +6,8 @@ import { Redirect } from 'react-router-dom';
 import Spinner from './Spinner';
 
 export const Login = () => {
-    const {value:userName, bind:bindUserName, reset:resetUserName} = useForm('');
-    const {value:passWord, bind:bindPassWord, reset:resetPassWord} = useForm('');
+    const { value: userName, bind: bindUserName, reset: resetUserName } = useForm('');
+    const { value: passWord, bind: bindPassWord, reset: resetPassWord } = useForm('');
     const userauth = useSelector((state) => state.userauth);
     const dispatch = useDispatch();
 
@@ -20,8 +20,10 @@ export const Login = () => {
         }
         loginUser(dispatch, credentials);
 
-        resetUserName();
-        resetPassWord();
+        if (userauth.isLoggedIn && !userauth.loading && Object.keys(userauth.errors).length == 0) {
+            resetUserName();
+            resetPassWord();
+        }
     }
 
     const loginForm = (
@@ -32,22 +34,23 @@ export const Login = () => {
                 <p>User e-mail address: <strong>test@test.com</strong></p>
                 <p>Password: <strong>1234</strong></p>
             </div>
-            
+
             <div id="login-form">
                 <h3>Log In to MyKanBan</h3>
                 <form onSubmit={handleSubmit}>
-                    <input 
+                    <input
                         type="email"
                         name="username"
                         placeholder='Email Address'
                         {...bindUserName}
                         required />
-                    <input 
+                    <input
                         type="password"
                         name="password"
                         placeholder='Password'
                         {...bindPassWord}
                         required />
+                    {Object.keys(userauth.errors).length > 0 ? <p id="login-error">Invalid username and password combination</p> : <></>}
                     <button type="submit">Login</button>
                 </form>
             </div>
@@ -56,8 +59,8 @@ export const Login = () => {
 
     return (
         <>
-        {userauth.isLoggedIn ? <Redirect to="/"></Redirect> : loginForm}
-        {userauth.loading ? <Spinner></Spinner>:<></>}
+            {userauth.isLoggedIn ? <Redirect to="/"></Redirect> : loginForm}
+            {userauth.loading ? <Spinner></Spinner> : <></>}
         </>
     );
 }

@@ -180,6 +180,14 @@ section {
   border-radius: 1rem;
 }
 
+#login-error {
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 1rem 0.5rem;
+  color: red;
+  font-weight: bold;
+}
+
 #kanban-container {
   min-height: 75vh;
 }

@@ -3,15 +3,12 @@
     min-height: 80vh;
     margin: inherit;
     padding: 1rem;
+    text-align: left;
 }
 
 .kanban-top {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-}
-
-.kanban-project-name {
-    text-align: left;
 }
 
 .column-container {
@@ -67,5 +64,4 @@
 
 .kanban-addticket-button-container {
     width: 20%;
-    margin: 0 auto;
 }
