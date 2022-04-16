@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import { Provider } from 'react-redux';
 import Register from './components/Register';
+import About from './components/About';
 
 // React - Redux
 import store from './store';
@@ -80,13 +81,5 @@ class App extends Component {
     );
   }
 }
-
-function About () {
-  return (
-    <div>
-      <h1>About</h1>
-    </div>
-  );
-};
 
 export default App;
