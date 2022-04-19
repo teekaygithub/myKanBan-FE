@@ -42,10 +42,10 @@ export const loginUser =  async (dispatch, credentials) => {
         });
     } catch (err) {
         console.log(`Login failure: ${err}`);
-        return {
+        dispatch({
             type: ERRORS,
-            payload: {}
-        }
+            payload: {err}
+        });
     }
 }
 

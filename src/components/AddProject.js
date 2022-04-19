@@ -1,105 +1,74 @@
-import {Component} from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { postProject } from '../actions/projectActions';
 import Modal from 'react-modal';
 
-class AddProject extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: "",
-            description: "",
-            projectIdentifier: "",
-            openModal: false
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleOpenModal = this.handleOpenModal.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-    }
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm } from './useForm';
 
-    handleChange(e) {
-        this.setState({
-            [e.target.name] : e.target.value,
-        });
-    }
+function AddProject() {
+    const [openModal, setModal] = useState(false);
+    const dispatch = useDispatch();
+    const { value: title, bind: bindTitle, reset: resetTitle } = useForm('');
+    const { value: description, bind: bindDescription, reset: resetDescription } = useForm('');
+    const { value: projectIdentifier, bind: bindProjectIdentifier, reset: resetProjectIdentifier } = useForm('');
 
-    handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const newProject = {
-            title: this.state.title,
-            description: this.state.description,
-            projectIdentifier: this.state.projectIdentifier
+            title: title,
+            description: description,
+            projectIdentifier: projectIdentifier
         }
-        this.props.postProject(newProject);
-        this.setState({
-            openModal: false
-        });
+        postProject(dispatch, newProject); // Convert to hook
+        setModal(false);
+        resetTitle();
+        resetDescription();
+        resetProjectIdentifier();
     }
 
-    handleOpenModal() {
-        this.setState({
-            openModal: true,
-        })
-    }
-
-    handleCloseModal() {
-        this.setState({
-            openModal: false,
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <button id="project-add-button" onClick={this.handleOpenModal}>+NEW PROJECT</button>
-                <Modal
-                    isOpen={this.state.openModal}
-                    onRequestClose={this.handleCloseModal}
-                    className="modal-custom" >
-                    <h2>Create a new project</h2>
-                    <form onSubmit={this.handleSubmit} className="modal-form">
-                        <div className="form-group">
-                            <input 
-                                type="text" 
-                                name="title"
-                                className="form-control"
-                                onChange={this.handleChange}
-                                placeholder='Title (required)' ></input>
-                        </div>
-                        <div className="form-group">
-                            <input 
-                                type="text"
-                                name="description"
-                                className="form-control"
-                                onChange={this.handleChange}
-                                placeholder='Description' ></input>
-                        </div>
-                        <div className="form-group">
-                            <input 
-                                type="text"
-                                name="projectIdentifier"
-                                className="form-control"
-                                onChange={this.handleChange}
-                                placeholder='Project Identifier (4-5 uppercase characters)' ></input>
-                        </div>
-                        <button type="submit" >Submit</button>
-                    </form>
-                </Modal>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <button id="project-add-button" onClick={() => setModal(true)}>+NEW PROJECT</button>
+            <Modal
+                isOpen={openModal}
+                onRequestClose={() => setModal(false)}
+                className="modal-custom" >
+                <h2>Create a new project</h2>
+                <form onSubmit={handleSubmit} className="modal-form">
+                    <label>Title *</label>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            name="title"
+                            className="form-control"
+                            {...bindTitle}
+                            placeholder='Title (required)'
+                            required ></input>
+                    </div>
+                    <div className="form-group">
+                        <label>Description</label>
+                        <input
+                            type="text"
+                            name="description"
+                            className="form-control"
+                            {...bindDescription}
+                            placeholder='Description' ></input>
+                    </div>
+                    <div className="form-group">
+                        <label>Project Identifier *</label>
+                        <input
+                            type="text"
+                            name="projectIdentifier"
+                            className="form-control"
+                            {...bindProjectIdentifier}
+                            placeholder='Project Identifier (4-5 uppercase characters)'
+                            required ></input>
+                    </div>
+                    <button type="submit" >Submit</button>
+                </form>
+            </Modal>
+        </div>
+    );
 }
 
-AddProject.propType = {
-    postProject: PropTypes.func.isRequired
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        postProject: (newProject) => {postProject(dispatch, newProject);}
-    };
-}
-
-export default connect(null, mapDispatchToProps)(AddProject);
+export default AddProject;

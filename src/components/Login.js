@@ -1,89 +1,66 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { loginUser } from '../actions/authActions';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useForm } from './useForm';
+import { Redirect } from 'react-router-dom';
+import Spinner from './Spinner';
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username:"",
-            password:""
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+export const Login = () => {
+    const { value: userName, bind: bindUserName, reset: resetUserName } = useForm('');
+    const { value: passWord, bind: bindPassWord, reset: resetPassWord } = useForm('');
+    const userauth = useSelector((state) => state.userauth);
+    const dispatch = useDispatch();
 
-    handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    }
-
-    handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
+
         const credentials = {
-            "username": this.state.username,
-            "password": this.state.password
+            username: userName,
+            password: passWord
         }
-        this.props.loginUser(credentials);
-    }
+        loginUser(dispatch, credentials);
 
-    componentDidUpdate(prevProps) {
-        if (this.props.userauth.isLoggedIn && this.props.userauth.loading === false) {
-            console.log("Logged in, redirecting to dashboard");
-            this.props.history.push("/dashboard")
+        if (userauth.isLoggedIn && !userauth.loading && Object.keys(userauth.errors).length == 0) {
+            resetUserName();
+            resetPassWord();
         }
     }
 
-    render () {
-        return (
-            <div id="login-container">
-                <div id="login-banner">
-                    <h3>Thank you for trying out myKanBan!</h3>
-                    <p>Feel free to register for an account, or use the following credential below:</p>
-                    <p>User e-mail address: <strong>test@test.com</strong></p>
-                    <p>Password: <strong>1234</strong></p>
-                </div>
-                
-                <div id="login-form">
-                    <h3>Log In to MyKanBan</h3>
-                    <form>
-                        <input 
-                            type="email"
-                            name="username"
-                            placeholder='Email Address'
-                            onChange={this.handleChange}
-                            value={this.state.email} />
-                        <input 
-                            type="password"
-                            name="password"
-                            placeholder='Password'
-                            onChange={this.handleChange}
-                            value={this.state.password} />
-                        <button 
-                            type="submit" 
-                            onClick={this.handleSubmit}>Login</button>
-                    </form>
-                </div>
+    const loginForm = (
+        <div id="login-container">
+            <div id="login-banner">
+                <h3>Thank you for trying out myKanBan!</h3>
+                <p>Feel free to register for an account, or use the following credential below:</p>
+                <p>User e-mail address: <strong>test@test.com</strong></p>
+                <p>Password: <strong>1234</strong></p>
             </div>
-        );
-    }
+
+            <div id="login-form">
+                <h3>Log In to MyKanBan</h3>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="email"
+                        name="username"
+                        placeholder='Email Address'
+                        {...bindUserName}
+                        required />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder='Password'
+                        {...bindPassWord}
+                        required />
+                    {Object.keys(userauth.errors).length > 0 ? <p id="login-error">Invalid username and password combination</p> : <></>}
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    );
+
+    return (
+        <>
+            {userauth.isLoggedIn ? <Redirect to="/"></Redirect> : loginForm}
+            {userauth.loading ? <Spinner></Spinner> : <></>}
+        </>
+    );
 }
-
-Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    userauth: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-    userauth: state.userauth
-});
-
-function mapDispatchToProps(dispatch) {
-    return {
-        loginUser: (credentials) => {loginUser(dispatch, credentials)}
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
