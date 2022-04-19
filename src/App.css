@@ -156,7 +156,7 @@ section {
   margin: inherit;
   padding: 1rem;
   max-width: 70vw;
-  height: 65vh;
+  min-height: 65vh;
   display: flex;
   justify-content: space-between;
 }
