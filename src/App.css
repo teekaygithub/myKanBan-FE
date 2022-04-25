@@ -95,13 +95,8 @@ button:hover {
   top: 0;
 }
 
-.logo {
-  color: white;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  padding: 1rem;
-  font-size: 3rem;
+#logo {
+  margin-left: 1.5rem;
 }
 
 .header-menu {

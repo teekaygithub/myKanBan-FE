@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
+import logo from "../mykanbanlogo.png";
 
 class Header extends Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class Header extends Component {
     let presentation = this.props.userauth.isLoggedIn ? privateHeader : publicHeader;
     return(
       <div className="header-bar">
-        <Link to="/" className="logo" >HOME</Link>
+        <Link to="/" id="logo" >
+          <img src={logo}></img>
+        </Link>
         <div className="header-menu" >
           {presentation}
         </div>
