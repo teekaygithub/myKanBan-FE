@@ -1,8 +1,8 @@
 var API = "";
 if (process.env.NODE_ENV == 'production') {
-    API = "https://ec2-54-193-55-175.us-west-1.compute.amazonaws.com:8443/";
+    API = "http://ec2-54-193-55-175.us-west-1.compute.amazonaws.com:8080/";
 } else {
-    API = "https://localhost:8443/"
+    API = "http://localhost:8080/"
 }
 
 export var API;
