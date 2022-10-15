@@ -14,7 +14,7 @@ import Footer from './components/Footer';
 import { Login } from './components/Login';
 import { Provider } from 'react-redux';
 import Register from './components/Register';
-import About from './components/About';
+import { About } from './components/About';
 
 // React - Redux
 import store from './store';
