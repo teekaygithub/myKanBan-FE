@@ -4,7 +4,13 @@ import { LOGIN, ERRORS, LOGOUT, AUTH_REQUEST } from './types';
 import { API } from '../constants';
 import { AppDispatch } from '../store';
 
-export const registerUser = async (dispatch: AppDispatch, newUser:any, history:any) => {
+export interface AppUser {
+    username: string,
+    fullname: string,
+    password: string,
+}
+
+export const registerUser = async (dispatch: AppDispatch, newUser: AppUser, history: any) => {
     try {
         dispatch({
             type: AUTH_REQUEST

@@ -10,7 +10,7 @@ import { AuthState } from '../reducers/authReducer';
 export const Login = () => {
     const { value: userName, bind: bindUserName, reset: resetUserName } = useForm('');
     const { value: passWord, bind: bindPassWord, reset: resetPassWord } = useForm('');
-    const userauth:AuthState = useSelector((state: AppState) => state.userauth);
+    const userauth: AuthState = useSelector((state: AppState) => state.userauth);
     const dispatch: AppDispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent): void => {

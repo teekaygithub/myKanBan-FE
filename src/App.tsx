@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
   Switch,
   Route
@@ -13,7 +13,7 @@ import { Welcome } from './components/Welcome';
 import Footer from './components/Footer';
 import { Login } from './components/Login';
 import { Provider } from 'react-redux';
-import Register from './components/Register';
+import { Register } from './components/Register';
 import { About } from './components/About';
 
 // React - Redux
@@ -23,7 +23,7 @@ import { setRequestHeader } from './actions/jwtUtility';
 import { isTokenExpired } from './actions/jwtUtility';
 
 class App extends Component {
-  constructor(props) {
+  constructor(props:any) {
     super(props);
   }
 
@@ -33,7 +33,7 @@ class App extends Component {
       let isExpired = isTokenExpired(token);
       console.log(`Is token expired? ${isExpired}`);
       if (isExpired) {
-        setRequestHeader(false);
+        setRequestHeader("");
         localStorage.removeItem('jwt');
         store.dispatch({
           type: LOGOUT
@@ -46,7 +46,7 @@ class App extends Component {
         });
       }
     } else {
-      setRequestHeader(false);
+      setRequestHeader("");
       store.dispatch({
         type: LOGOUT
       });
