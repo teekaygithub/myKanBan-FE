@@ -9,7 +9,7 @@ import {
 import Header from "./components/Header";
 import ProjectContainer from "./components/ProjectContainer";
 import KanBanContainer from "./components/KanBanContainer";
-import Welcome from './components/Welcome';
+import { Welcome } from './components/Welcome';
 import Footer from './components/Footer';
 import { Login } from './components/Login';
 import { Provider } from 'react-redux';
