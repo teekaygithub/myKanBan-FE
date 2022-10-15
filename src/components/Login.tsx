@@ -1,22 +1,26 @@
-import { loginUser } from '../actions/authActions';
+import { loginUser, LoginCredentials } from '../actions/authActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from './useForm';
 import { Redirect } from 'react-router-dom';
 import Spinner from './Spinner';
+import React from 'react';
+import { AppDispatch, AppState } from '../store';
+import { AuthState } from '../reducers/authReducer';
 
 export const Login = () => {
     const { value: userName, bind: bindUserName, reset: resetUserName } = useForm('');
     const { value: passWord, bind: bindPassWord, reset: resetPassWord } = useForm('');
-    const userauth = useSelector((state) => state.userauth);
-    const dispatch = useDispatch();
+    const userauth:AuthState = useSelector((state: AppState) => state.userauth);
+    const dispatch: AppDispatch = useDispatch();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event: React.FormEvent): void => {
+        event.preventDefault();
 
-        const credentials = {
+        const credentials: LoginCredentials = {
             username: userName,
             password: passWord
         }
+
         loginUser(dispatch, credentials);
 
         if (userauth.isLoggedIn && !userauth.loading && Object.keys(userauth.errors).length == 0) {

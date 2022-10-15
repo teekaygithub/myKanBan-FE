@@ -1,6 +1,14 @@
 import { LOGIN, ERRORS, LOGOUT, AUTH_REQUEST } from "../actions/types";
 
-const initialState = {
+export interface AuthState {
+    token: object,
+    isLoggedIn: boolean,
+    user: any,
+    loading: boolean,
+    errors: any
+}
+
+const initialState: AuthState = {
     token: {},
     isLoggedIn: false,
     user: {},
@@ -8,8 +16,8 @@ const initialState = {
     errors: {}
 }
 
-export default function(state=initialState, action) {
-    switch(action.type) {
+export default function (state:AuthState = initialState, action: any) {
+    switch (action.type) {
         case AUTH_REQUEST:
             return {
                 ...state,
