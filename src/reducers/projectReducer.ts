@@ -1,14 +1,22 @@
-import { GET_ONE_PROJECT, GET_PROJECT,POST_PROJECT, PROJECT_REQUESTING } from "../actions/types";
+import { defaultProject, Project } from "../actions/projectActions";
+import { GET_ONE_PROJECT, GET_PROJECT, POST_PROJECT, PROJECT_REQUESTING } from "../actions/types";
 
-const initialState = {
+export interface ProjectState {
+    projectlist: Project[],
+    lastProject: Project,
+    loading: Boolean,
+    errors: object
+}
+
+const initialState: ProjectState = {
     projectlist: [],
-    lastProject: {},
+    lastProject: defaultProject,
     loading: false,
     errors: {}
 }
 
-const projectReducer = (state=initialState, action) => {
-    switch(action.type) {
+const projectReducer = (state: ProjectState = initialState, action:any) => {
+    switch (action.type) {
         case GET_PROJECT:
             return {
                 ...state,
@@ -19,7 +27,7 @@ const projectReducer = (state=initialState, action) => {
             return {
                 ...state,
                 lastProject: action.payload,
-                loading:false
+                loading: false
             }
         case POST_PROJECT:
             return {
@@ -32,7 +40,7 @@ const projectReducer = (state=initialState, action) => {
                 ...state,
                 loading: true
             }
-        
+
         default:
             return state;
     }

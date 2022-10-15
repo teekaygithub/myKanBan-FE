@@ -2,7 +2,7 @@ import { loginUser, LoginCredentials } from '../actions/authActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from './useForm';
 import { Redirect } from 'react-router-dom';
-import Spinner from './Spinner';
+import { Spinner } from './Spinner';
 import React from 'react';
 import { AppDispatch, AppState } from '../store';
 import { AuthState } from '../reducers/authReducer';

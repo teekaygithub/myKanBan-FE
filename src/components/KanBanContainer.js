@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import Column from './Column';
 import AddTicket from './AddTicket';
 import '../App.css';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTickets } from '../actions/ticketActions';
 import { getOneProject } from '../actions/projectActions';
-import Spinner from './Spinner';
+import { Spinner } from './Spinner';
 
 class KanBanContainer extends Component {
     constructor(props) {
@@ -26,18 +26,18 @@ class KanBanContainer extends Component {
         this.props.getOneProject(PID);
     }
 
-    render () {
+    render() {
         if (this.props.myprojects.loading) {
             return (
-                <div style={{height: "100vh", textAlign: "center"}}>
+                <div style={{ height: "100vh", textAlign: "center" }}>
                     <Spinner />
                 </div>
             );
         } else {
             if (this.props.mytickets.ticketlist.length > 0) {
                 const status = ["TODO", "INPROGRESS", "DONE"];
-                const columns = status.map(stat => (<Column 
-                    tickets={this.props.mytickets.ticketlist.filter(x => x.status === stat)} 
+                const columns = status.map(stat => (<Column
+                    tickets={this.props.mytickets.ticketlist.filter(x => x.status === stat)}
                     status={stat}
                     history={this.props.history} />));
                 return (
@@ -61,7 +61,7 @@ class KanBanContainer extends Component {
                     </div>
                 );
             }
-        } 
+        }
     }
 }
 
@@ -79,8 +79,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTickets: (PID) => {getTickets(dispatch, PID);},
-        getOneProject: (PID) => {getOneProject(dispatch, PID)}
+        getTickets: (PID) => { getTickets(dispatch, PID); },
+        getOneProject: (PID) => { getOneProject(dispatch, PID) }
     };
 }
 

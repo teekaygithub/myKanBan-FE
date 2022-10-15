@@ -7,7 +7,7 @@ import {
 
 // Custom components
 import Header from "./components/Header";
-import ProjectContainer from "./components/ProjectContainer";
+import { ProjectContainer } from "./components/ProjectContainer";
 import KanBanContainer from "./components/KanBanContainer";
 import { Welcome } from './components/Welcome';
 import Footer from './components/Footer';
@@ -23,7 +23,7 @@ import { setRequestHeader } from './actions/jwtUtility';
 import { isTokenExpired } from './actions/jwtUtility';
 
 class App extends Component {
-  constructor(props:any) {
+  constructor(props: any) {
     super(props);
   }
 

@@ -1,18 +1,17 @@
-import { Component } from 'react';
 import ProjectCard from './ProjectCard';
 import AddProject from './AddProject';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getProjects } from '../actions/projectActions';
-import Spinner from './Spinner';
+import { getProjects, Project } from '../actions/projectActions';
+import { Spinner } from './Spinner';
 import '../dashboard.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { AppDispatch, AppState } from '../store';
+import { ProjectState } from '../reducers/projectReducer';
 
-function ProjectContainer() {
-    const myProjects = useSelector((state) => state.myprojects);
-    const dispatch = useDispatch();
+export const ProjectContainer = (): JSX.Element => {
+    const myProjects:ProjectState = useSelector((state: AppState) => state.myprojects);
+    const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
         // Dispatch action for getting all projects registered to a user
@@ -20,7 +19,7 @@ function ProjectContainer() {
     }, []);
 
     // List of all the project card elements
-    const projectElem = myProjects.projectlist.map((el, index) => {
+    const projectElem = myProjects.projectlist.map((el:Project, index:number) => {
         return (
             <div key={index} className="project-card">
                 <ProjectCard
@@ -75,5 +74,3 @@ function ProjectContainer() {
         </>
     );
 }
-
-export default ProjectContainer;
