@@ -55,7 +55,7 @@ export const getOneProject = async (dispatch: AppDispatch, PID:string) => {
     }
 }
 
-export interface Project {
+export interface iProject {
     title: string,
     description?: string,
     projectIdentifier: string,
@@ -69,7 +69,7 @@ export const defaultProject ={
     id: 0
 }
 
-export const postProject = async (dispatch: AppDispatch, newProject: Project) => {
+export const postProject = async (dispatch: AppDispatch, newProject: iProject) => {
     try {
         dispatch({
             type: PROJECT_REQUESTING

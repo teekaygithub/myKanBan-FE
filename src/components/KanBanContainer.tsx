@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Column } from './Column';
-import AddTicket from './AddTicket';
+import { AddTicket } from './AddTicket';
 import '../App.css';
 import '../kanban.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTickets } from '../actions/ticketActions';
-import { getOneProject } from '../actions/projectActions';
+import { getTickets, iTicket } from '../actions/ticketActions';
+import { getOneProject, iProject } from '../actions/projectActions';
 import { Spinner } from './Spinner';
 import { useHistory } from 'react-router';
+import { AppDispatch, AppState } from '../store';
 
-export const KanBanContainer = (props) => {
-    const [project, setProject] = useState({});
-    const myprojects = useSelector((state) => state.myprojects);
-    const mytickets = useSelector((state) => state.mytickets);
-    const dispatch = useDispatch();
+export const KanBanContainer = (props: any) => {
+    const [project, setProject] = useState<iProject | null>(null);
+    const myprojects = useSelector((state: AppState) => state.myprojects);
+    const mytickets = useSelector((state: AppState) => state.mytickets);
+    const dispatch: AppDispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
@@ -32,13 +33,13 @@ export const KanBanContainer = (props) => {
         );
     } else {
         if (mytickets.ticketlist.length > 0) {
-            const status = {
+            const status: { [key: string]: iTicket[] } = {
                 "TODO": [],
                 "INPROGRESS": [],
                 "DONE": []
             }
             // Divide the tickets into separate lists for each status code
-            mytickets.ticketlist.forEach((ticket) => {
+            mytickets.ticketlist.forEach((ticket: iTicket) => {
                 status[ticket.status].push(ticket);
             });
 

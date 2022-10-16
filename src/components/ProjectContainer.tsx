@@ -1,6 +1,6 @@
 import ProjectCard from './ProjectCard';
 import AddProject from './AddProject';
-import { getProjects, Project } from '../actions/projectActions';
+import { getProjects, iProject } from '../actions/projectActions';
 import { Spinner } from './Spinner';
 import '../dashboard.css';
 
@@ -19,7 +19,7 @@ export const ProjectContainer = (): JSX.Element => {
     }, []);
 
     // List of all the project card elements
-    const projectElem = myProjects.projectlist.map((el:Project, index:number) => {
+    const projectElem = myProjects.projectlist.map((el:iProject, index:number) => {
         return (
             <div key={index} className="project-card">
                 <ProjectCard

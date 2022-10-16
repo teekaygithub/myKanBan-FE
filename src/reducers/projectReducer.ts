@@ -1,9 +1,9 @@
-import { defaultProject, Project } from "../actions/projectActions";
+import { defaultProject, iProject } from "../actions/projectActions";
 import { GET_ONE_PROJECT, GET_PROJECT, POST_PROJECT, PROJECT_REQUESTING } from "../actions/types";
 
 export interface ProjectState {
-    projectlist: Project[],
-    lastProject: Project|null,
+    projectlist: iProject[],
+    lastProject: iProject|null,
     loading: Boolean,
     errors: object
 }
