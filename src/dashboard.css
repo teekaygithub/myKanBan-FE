@@ -12,6 +12,11 @@
     width: 60vw;
 }
 
+#project-add-button-container {
+    width: 30%;
+    margin: 5rem auto;
+}
+
 #project-add-button {
     transition: all 0.2s ease-in-out;
     padding: 1rem 0.3rem;

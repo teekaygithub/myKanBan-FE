@@ -1,20 +1,21 @@
-import { postProject } from '../actions/projectActions';
+import { iProject, postProject } from '../actions/projectActions';
 import Modal from 'react-modal';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from './useForm';
+import { AppDispatch } from '../store';
 
-function AddProject() {
-    const [openModal, setModal] = useState(false);
-    const dispatch = useDispatch();
+const AddProject = () => {
+    const [openModal, setModal] = useState<boolean>(false);
+    const dispatch: AppDispatch = useDispatch();
     const { value: title, bind: bindTitle, reset: resetTitle } = useForm('');
     const { value: description, bind: bindDescription, reset: resetDescription } = useForm('');
     const { value: projectIdentifier, bind: bindProjectIdentifier, reset: resetProjectIdentifier } = useForm('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const newProject = {
+        const newProject: iProject = {
             title: title,
             description: description,
             projectIdentifier: projectIdentifier
@@ -27,7 +28,7 @@ function AddProject() {
     }
 
     return (
-        <div>
+        <div id="project-add-button-container">
             <button id="project-add-button" onClick={() => setModal(true)}>+NEW PROJECT</button>
             <Modal
                 isOpen={openModal}

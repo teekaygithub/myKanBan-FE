@@ -26,21 +26,21 @@ export const ProjectContainer = (): JSX.Element => {
                     title={el.title}
                     description={el.description}
                     PID={el.projectIdentifier}
-                    id={el.id} />
+                    id={el.id!} />
             </div>
         );
     });
 
     // Show this if user has at least one project
     const projectView = (
-        <div className="container">
+        <div>
             <div id="project-banner">
                 <h1
                     className="my-3"
                     style={{ textAlign: 'center' }}>
                     Your Active Projects
                 </h1>
-                <div className="d-flex justify-content-end w-75 my-4">
+                <div>
                     <AddProject />
                 </div>
             </div>
@@ -52,7 +52,7 @@ export const ProjectContainer = (): JSX.Element => {
     );
 
     const projectEmpty = (
-        <div className="container">
+        <div>
             <h1>Let's get started with a project!</h1>
             <AddProject />
         </div>
