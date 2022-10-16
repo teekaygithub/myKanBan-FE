@@ -1,63 +1,44 @@
 import { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
 import logo from "../mykanbanlogo.png";
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLogout = this.handleLogout.bind(this);
+export const Header = (props) => {
+
+  const userauth = useSelector((state) => state.userauth);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    logoutUser(dispatch);
+    props.history.push("/login");
   }
 
-  handleLogout() {
-    this.props.logoutUser();
-    this.props.history.push("/login");
-  }
+  const privateHeader = (
+    <>
+      <Link to="/dashboard">Dashboard</Link>
+      <a href="" onClick={handleLogout} >Log Out</a>
+    </>
+  );
 
-  render() {
-    const privateHeader = (
-      <>
-        <Link to="/dashboard">Dashboard</Link>
-        <a href="" onClick={this.handleLogout} >Log Out</a>
-      </>
-    );
+  const publicHeader = (
+    <>
+      <Link to="/login">Log In</Link>
+      <Link to="/register" id="register-button" >Register</Link>
+    </>
+  );
 
-    const publicHeader = (
-      <>
-        <Link to="/login">Log In</Link>
-        <Link to="/register" id="register-button" >Register</Link>
-      </>
-    );
+  let presentation = userauth.isLoggedIn ? privateHeader : publicHeader;
 
-    let presentation = this.props.userauth.isLoggedIn ? privateHeader : publicHeader;
-    return(
-      <div className="header-bar">
-        <Link to="/" id="logo" >
-          <img src={logo}></img>
-        </Link>
-        <div className="header-menu" >
-          {presentation}
-        </div>
+  return (
+    <div className="header-bar">
+      <Link to="/" id="logo" >
+        <img src={logo}></img>
+      </Link>
+      <div className="header-menu" >
+        {presentation}
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-Header.propTypes = {
-  userauth: PropTypes.object.isRequired,
-  logoutUser: PropTypes.func.isRequired
-}
-
-const mapStateToProps = (state) => ({
-  userauth: state.userauth
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logoutUser: () => logoutUser(dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);

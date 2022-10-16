@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 
 // Custom components
-import Header from "./components/Header";
+import { Header } from "./components/Header";
 import { ProjectContainer } from "./components/ProjectContainer";
 import KanBanContainer from "./components/KanBanContainer";
 import { Welcome } from './components/Welcome';

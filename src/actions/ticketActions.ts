@@ -1,19 +1,21 @@
 import { GET_TICKETS, POST_TICKET, ERRORS, TICKET_REQUESTING } from "./types";
 import axios from 'axios';
 import { API } from "../constants";
+import { AppDispatch } from "../store";
 
-export const getTickets = async (dispatch, PID) => {
+export const getTickets = async (dispatch: AppDispatch, PID: string) => {
     try {
         dispatch({
             type: TICKET_REQUESTING
         });
 
         const res = await axios.get(
-            `${API}api/projects/alltickets?projectIdentifier=${PID}`, 
-            {headers: 
-                {'Authorization': localStorage.getItem('jwt')}
+            `${API}api/projects/alltickets?projectIdentifier=${PID}`,
+            {
+                headers:
+                    { 'Authorization': localStorage.getItem('jwt') || "" }
             });
-        
+
         dispatch({
             type: GET_TICKETS,
             payload: res.data
@@ -27,19 +29,20 @@ export const getTickets = async (dispatch, PID) => {
     }
 }
 
-export const postTicket = async(dispatch, PID, newTicket) => {
+export const postTicket = async (dispatch: AppDispatch, PID: string, newTicket: object) => {
     try {
         dispatch({
             type: TICKET_REQUESTING
         });
 
         const res = await axios.post(
-            `${API}api/projects/ticket?projectIdentifier=${PID}`, 
-            newTicket, 
-            {headers: 
-                {'Authorization': localStorage.getItem('jwt')}
+            `${API}api/projects/ticket?projectIdentifier=${PID}`,
+            newTicket,
+            {
+                headers:
+                    { 'Authorization': localStorage.getItem('jwt') || "" }
             });
-        
+
         dispatch({
             type: POST_TICKET,
             payload: res.data
@@ -53,13 +56,14 @@ export const postTicket = async(dispatch, PID, newTicket) => {
     }
 }
 
-export const updateTicket = async (dispatch, PID, ticket) => {
+export const updateTicket = async (dispatch: AppDispatch, PID: string, ticket: object) => {
     try {
         await axios.post(
-            `${API}api/projects/ticket?projectIdentifier=${PID}`, 
-            ticket, 
-            {headers: 
-                {'Authorization': localStorage.getItem('jwt')}
+            `${API}api/projects/ticket?projectIdentifier=${PID}`,
+            ticket,
+            {
+                headers:
+                    { 'Authorization': localStorage.getItem('jwt') || "" }
             });
         dispatch({
             type: ERRORS,
