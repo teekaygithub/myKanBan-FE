@@ -44,8 +44,7 @@ export const KanBanContainer = (props) => {
 
             const columns = Object.keys(status).map(stat => <Column
                 tickets={status[stat]}
-                status={stat}
-                history={history} />);
+                status={stat} />);
             return (
                 <div className="kanban-container">
                     <div className="kanban-top">

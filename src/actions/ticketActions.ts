@@ -3,7 +3,7 @@ import axios from 'axios';
 import { API } from "../constants";
 import { AppDispatch } from "../store";
 
-export interface Ticket {
+export interface iTicket {
     title: string,
     description: string,
     ticketIdentifier: string,

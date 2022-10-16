@@ -1,8 +1,8 @@
-import { Ticket } from "../actions/ticketActions"
+import { iTicket } from "../actions/ticketActions"
 import { GET_TICKETS, POST_TICKET, TICKET_REQUESTING } from "../actions/types"
 
 export interface TicketState {
-    ticketlist: Ticket[],
+    ticketlist: iTicket[],
     loading: Boolean,
     errors: object    
 }
