@@ -4,11 +4,13 @@ import { API } from "../constants";
 import { AppDispatch } from "../store";
 
 export interface iTicket {
+    id: string,
     title: string,
     description: string,
     ticketIdentifier: string,
     projectIdentifier: string
-    status: string
+    status: string,
+    target_date: string,
 }
 
 export const getTickets = async (dispatch: AppDispatch, PID: string) => {

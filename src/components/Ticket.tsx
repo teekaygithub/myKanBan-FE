@@ -1,19 +1,24 @@
-import { useState } from 'react';
-import Modal from 'react-modal/lib/components/Modal';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import { iTicket } from '../actions/ticketActions';
 
-export const Ticket = (props) => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [title, setTitle] = useState(props.ticket.title);
-    const [description, setDescription] = useState(props.ticket.description);
-    const [target_date, setTargetDate] = useState(props.ticket.target_date);
+export interface iTicketProps {
+    ticket: iTicket
+}
 
-    const handleDrag = (e) => {
+export const Ticket = (props: iTicketProps) => {
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>(props.ticket.title);
+    const [description, setDescription] = useState<string>(props.ticket.description);
+    const [target_date, setTargetDate] = useState<string>(props.ticket.target_date);
+
+    const handleDrag = (e: React.DragEvent) => {
         e.dataTransfer.setData("TID", props.ticket.ticketIdentifier);
         e.dataTransfer.setData("PID", props.ticket.projectIdentifier);
         e.dataTransfer.setData("key", props.ticket.id);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
     }
 

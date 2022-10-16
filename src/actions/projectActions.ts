@@ -15,7 +15,7 @@ export const getProjects = async (dispatch: AppDispatch) => {
                 headers:
                     { 'Authorization': localStorage.getItem('jwt') || "" }
             });
-        await new Promise(r => setTimeout(r, 2000)); // Simulated latency
+        // await new Promise(r => setTimeout(r, 2000)); // Simulated latency
 
         dispatch({
             type: GET_PROJECT,
