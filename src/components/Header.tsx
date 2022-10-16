@@ -1,18 +1,19 @@
-import { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
 import logo from "../mykanbanlogo.png";
+import { AppDispatch, AppState } from '../store';
+import { AuthState } from '../reducers/authReducer';
 
-export const Header = (props) => {
+export const Header = () => {
 
-  const userauth = useSelector((state) => state.userauth);
-  const dispatch = useDispatch();
+  const userauth: AuthState = useSelector((state: AppState) => state.userauth);
+  const dispatch: AppDispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogout = () => {
     logoutUser(dispatch);
-    props.history.push("/login");
+    history.push("/login");
   }
 
   const privateHeader = (
