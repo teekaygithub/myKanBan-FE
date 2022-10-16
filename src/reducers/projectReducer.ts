@@ -3,14 +3,14 @@ import { GET_ONE_PROJECT, GET_PROJECT, POST_PROJECT, PROJECT_REQUESTING } from "
 
 export interface ProjectState {
     projectlist: Project[],
-    lastProject: Project,
+    lastProject: Project|null,
     loading: Boolean,
     errors: object
 }
 
 const initialState: ProjectState = {
     projectlist: [],
-    lastProject: defaultProject,
+    lastProject: null,
     loading: false,
     errors: {}
 }

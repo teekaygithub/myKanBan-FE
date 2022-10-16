@@ -3,6 +3,14 @@ import axios from 'axios';
 import { API } from "../constants";
 import { AppDispatch } from "../store";
 
+export interface Ticket {
+    title: string,
+    description: string,
+    ticketIdentifier: string,
+    projectIdentifier: string
+    status: string
+}
+
 export const getTickets = async (dispatch: AppDispatch, PID: string) => {
     try {
         dispatch({
@@ -14,7 +22,8 @@ export const getTickets = async (dispatch: AppDispatch, PID: string) => {
             {
                 headers:
                     { 'Authorization': localStorage.getItem('jwt') || "" }
-            });
+            }
+        );
 
         dispatch({
             type: GET_TICKETS,

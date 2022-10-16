@@ -8,7 +8,7 @@ import {
 // Custom components
 import { Header } from "./components/Header";
 import { ProjectContainer } from "./components/ProjectContainer";
-import KanBanContainer from "./components/KanBanContainer";
+import { KanBanContainer } from "./components/KanBanContainer";
 import { Welcome } from './components/Welcome';
 import Footer from './components/Footer';
 import { Login } from './components/Login';

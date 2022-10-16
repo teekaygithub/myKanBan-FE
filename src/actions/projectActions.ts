@@ -42,8 +42,6 @@ export const getOneProject = async (dispatch: AppDispatch, PID:string) => {
                 headers:
                     { 'Authorization': localStorage.getItem('jwt') || "" }
             });
-        console.log(res);
-        await new Promise(r => setTimeout(r, 2000));
 
         dispatch({
             type: GET_ONE_PROJECT,

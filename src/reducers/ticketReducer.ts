@@ -1,7 +1,8 @@
+import { Ticket } from "../actions/ticketActions"
 import { GET_TICKETS, POST_TICKET, TICKET_REQUESTING } from "../actions/types"
 
 export interface TicketState {
-    ticketlist: object[],
+    ticketlist: Ticket[],
     loading: Boolean,
     errors: object    
 }
