@@ -1,7 +1,13 @@
-import React from 'react';
 import {Link} from 'react-router-dom';
 
-var ProjectCard = (props) => {
+export interface iProjectCardProps {
+    id: string,
+    title: string,
+    description?: string,
+    PID: string,
+}
+
+export const ProjectCard = (props: iProjectCardProps) => {
     const link = "/project/" + props.PID;
     return (
         <>
@@ -15,5 +21,3 @@ var ProjectCard = (props) => {
         </>
     );
 }
-
-export default ProjectCard;

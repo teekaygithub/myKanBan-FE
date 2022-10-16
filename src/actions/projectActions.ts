@@ -59,7 +59,7 @@ export interface iProject {
     title: string,
     description?: string,
     projectIdentifier: string,
-    id: number
+    id: string
 }
 
 export const defaultProject ={

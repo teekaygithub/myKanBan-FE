@@ -1,4 +1,4 @@
-import ProjectCard from './ProjectCard';
+import { ProjectCard } from './ProjectCard';
 import AddProject from './AddProject';
 import { getProjects, iProject } from '../actions/projectActions';
 import { Spinner } from './Spinner';
@@ -10,7 +10,7 @@ import { AppDispatch, AppState } from '../store';
 import { ProjectState } from '../reducers/projectReducer';
 
 export const ProjectContainer = (): JSX.Element => {
-    const myProjects:ProjectState = useSelector((state: AppState) => state.myprojects);
+    const myProjects: ProjectState = useSelector((state: AppState) => state.myprojects);
     const dispatch: AppDispatch = useDispatch();
 
     useEffect(() => {
@@ -19,15 +19,14 @@ export const ProjectContainer = (): JSX.Element => {
     }, []);
 
     // List of all the project card elements
-    const projectElem = myProjects.projectlist.map((el:iProject, index:number) => {
+    const projectElem = myProjects.projectlist.map((el: iProject, index: number) => {
         return (
             <div key={index} className="project-card">
                 <ProjectCard
                     title={el.title}
                     description={el.description}
                     PID={el.projectIdentifier}
-                    id={el.id}
-                    className="my-auto" />
+                    id={el.id} />
             </div>
         );
     });
