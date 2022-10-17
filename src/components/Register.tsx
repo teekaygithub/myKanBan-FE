@@ -1,21 +1,21 @@
 import '../registerpage.css';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { AppUser, registerUser } from '../actions/authActions';
+import { iAppUser, registerUser } from '../actions/authActions';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
-// import { useForm } from './useForm';
+import { useForm } from './useForm';
 
 export const Register = (props: any): JSX.Element => {
 
-    const [username, setUsername] = useState("");
-    const [fullname, setFullName] = useState("");
-    const [password, setPassWord] = useState("");
+    const { value: username, bind: bindUserName, reset: resetUserName } = useForm<string>("");
+    const { value: fullname, bind: bindFullName, reset: resetFullName } = useForm<string>("");
+    const { value: password, bind: bindPassword, reset: resetPassword } = useForm<string>("");
     const dispatch: AppDispatch = useDispatch();
 
     const handleSubmit = (event: React.FormEvent): void => {
         event.preventDefault();
-        const newUser: AppUser = { username, fullname, password }
+        const newUser: iAppUser = { username, fullname, password }
 
         registerUser(dispatch, newUser, props.history);
     }
@@ -38,20 +38,17 @@ export const Register = (props: any): JSX.Element => {
                         type="email"
                         name="username"
                         placeholder='Email address'
-                        onChange={(e) => { setUsername(e.target.value) }}
-                        value={username} />
+                        {...bindUserName} />
                     <input
                         type="text"
                         name="fullname"
                         placeholder='Your name'
-                        onChange={(e) => { setFullName(e.target.value) }}
-                        value={fullname} />
+                        {...bindFullName} />
                     <input
                         type="password"
                         name="password"
                         placeholder='Password'
-                        onChange={(e) => { setPassWord(e.target.value) }}
-                        value={password} />
+                        {...bindPassword} />
                     <button type="submit">Submit</button>
                 </form>
             </div>
