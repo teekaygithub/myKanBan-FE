@@ -8,8 +8,8 @@ import { AppDispatch, AppState } from '../store';
 import { AuthState } from '../reducers/authReducer';
 
 export const Login = () => {
-    const { value: userName, bind: bindUserName, reset: resetUserName } = useForm('');
-    const { value: passWord, bind: bindPassWord, reset: resetPassWord } = useForm('');
+    const { value: userName, bind: bindUserName, reset: resetUserName } = useForm<string>('');
+    const { value: passWord, bind: bindPassWord, reset: resetPassWord } = useForm<string>('');
     const userauth: AuthState = useSelector((state: AppState) => state.userauth);
     const dispatch: AppDispatch = useDispatch();
 

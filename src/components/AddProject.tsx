@@ -9,9 +9,9 @@ import { AppDispatch } from '../store';
 const AddProject = () => {
     const [openModal, setModal] = useState<boolean>(false);
     const dispatch: AppDispatch = useDispatch();
-    const { value: title, bind: bindTitle, reset: resetTitle } = useForm('');
-    const { value: description, bind: bindDescription, reset: resetDescription } = useForm('');
-    const { value: projectIdentifier, bind: bindProjectIdentifier, reset: resetProjectIdentifier } = useForm('');
+    const { value: title, bind: bindTitle, reset: resetTitle } = useForm<string>('');
+    const { value: description, bind: bindDescription, reset: resetDescription } = useForm<string>('');
+    const { value: projectIdentifier, bind: bindProjectIdentifier, reset: resetProjectIdentifier } = useForm<string>('');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
